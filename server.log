@@ -1,0 +1,698 @@
+============================================================
+[START] 自主智能学习系统
+============================================================
+[INFO] API docs: http://localhost:8000/docs
+[INFO] Health check: http://localhost:8000/health
+[INFO] CLI Q&A: python -m interfaces.cli qa
+============================================================
+
+INFO:     Will watch for changes in these directories: ['d:\\AGI\\autonomous_learning_system']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [2560] using WatchFiles
+INFO:     Started server process [22464]
+INFO:     Waiting for application startup.
+ERROR:    Traceback (most recent call last):
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\routing.py", line 694, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fastapi\routing.py", line 153, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+               ~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\AGI\autonomous_learning_system\app.py", line 44, in lifespan
+    print("\U0001f680 正在启动系统...")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'gbk' codec can't encode character '\U0001f680' in position 0: illegal multibyte sequence
+
+ERROR:    Application startup failed. Exiting.
+2026-03-02 18:45:02,445 [INFO] watchfiles.main: 5 changes detected
+2026-03-02 19:01:23,075 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:08:52,002 [INFO] watchfiles.main: 1 change detected
+WARNING:  WatchFiles detected changes in 'simple_test_v2.py'. Reloading...
+ INFO:     Started server process [3892]
+INFO:     Waiting for application startup.
+ERROR:    Traceback (most recent call last):
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\routing.py", line 694, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fastapi\routing.py", line 153, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+               ~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\AGI\autonomous_learning_system\app.py", line 44, in lifespan
+    print("\U0001f680 正在启动系统...")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'gbk' codec can't encode character '\U0001f680' in position 0: illegal multibyte sequence
+
+ERROR:    Application startup failed. Exiting.
+2026-03-02 19:09:05,285 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:09:13,506 [INFO] watchfiles.main: 1 change detected
+WARNING:  WatchFiles detected changes in 'quick_test.py'. Reloading...
+ INFO:     Started server process [7332]
+INFO:     Waiting for application startup.
+ERROR:    Traceback (most recent call last):
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\routing.py", line 694, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fastapi\routing.py", line 153, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+               ~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\AGI\autonomous_learning_system\app.py", line 44, in lifespan
+    print("\U0001f680 正在启动系统...")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'gbk' codec can't encode character '\U0001f680' in position 0: illegal multibyte sequence
+
+ERROR:    Application startup failed. Exiting.
+2026-03-02 19:09:21,292 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:11:28,670 [INFO] watchfiles.main: 3 changes detected
+2026-03-02 19:12:18,150 [INFO] watchfiles.main: 1 change detected
+WARNING:  WatchFiles detected changes in 'simple_test_v2.py'. Reloading...
+ INFO:     Started server process [26416]
+INFO:     Waiting for application startup.
+ERROR:    Traceback (most recent call last):
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\routing.py", line 694, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fastapi\routing.py", line 153, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+               ~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\AGI\autonomous_learning_system\app.py", line 44, in lifespan
+    print("\U0001f680 正在启动系统...")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'gbk' codec can't encode character '\U0001f680' in position 0: illegal multibyte sequence
+
+ERROR:    Application startup failed. Exiting.
+2026-03-02 19:12:25,128 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:21:53,222 [INFO] watchfiles.main: 1 change detected
+WARNING:  WatchFiles detected changes in 'verify_endpoints.py'. Reloading...
+ INFO:     Started server process [21032]
+INFO:     Waiting for application startup.
+ERROR:    Traceback (most recent call last):
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\routing.py", line 694, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fastapi\routing.py", line 153, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+               ~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\AGI\autonomous_learning_system\app.py", line 44, in lifespan
+    print("\U0001f680 正在启动系统...")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'gbk' codec can't encode character '\U0001f680' in position 0: illegal multibyte sequence
+
+ERROR:    Application startup failed. Exiting.
+2026-03-02 19:21:58,883 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:22:01,509 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:23:36,302 [INFO] watchfiles.main: 3 changes detected
+2026-03-02 19:24:30,919 [INFO] watchfiles.main: 3 changes detected
+2026-03-02 19:24:58,271 [INFO] watchfiles.main: 3 changes detected
+2026-03-02 19:28:56,225 [INFO] watchfiles.main: 3 changes detected
+2026-03-02 19:28:56,591 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:29:25,916 [INFO] watchfiles.main: 3 changes detected
+2026-03-02 19:29:26,326 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:29:27,333 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:30:08,029 [INFO] watchfiles.main: 2 changes detected
+2026-03-02 19:30:08,446 [INFO] watchfiles.main: 3 changes detected
+2026-03-02 19:30:13,244 [INFO] watchfiles.main: 2 changes detected
+WARNING:  WatchFiles detected changes in 'web_ui\server.py'. Reloading...
+ INFO:     Started server process [22316]
+INFO:     Waiting for application startup.
+ERROR:    Traceback (most recent call last):
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\routing.py", line 694, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fastapi\routing.py", line 153, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+               ~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\AGI\autonomous_learning_system\app.py", line 44, in lifespan
+    print("\U0001f680 正在启动系统...")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'gbk' codec can't encode character '\U0001f680' in position 0: illegal multibyte sequence
+
+ERROR:    Application startup failed. Exiting.
+2026-03-02 19:30:16,938 [INFO] watchfiles.main: 1 change detected
+WARNING:  WatchFiles detected changes in 'app.py'. Reloading...
+ Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from multiprocessing.spawn import spawn_main; spawn_main(parent_pid=2560, pipe_handle=1056)
+                                                  ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\spawn.py", line 131, in _main
+    prepare(preparation_data)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\spawn.py", line 246, in prepare
+    _fixup_main_from_path(data['init_main_from_path'])
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\spawn.py", line 297, in _fixup_main_from_path
+    main_content = runpy.run_path(main_path,
+                                  run_name="__mp_main__")
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "d:\AGI\autonomous_learning_system\app.py", line 127, in <module>
+    app = create_app()
+  File "d:\AGI\autonomous_learning_system\app.py", line 114, in create_app
+    app.include_router(router, prefix="/api/v1")
+                       ^^^^^^
+NameError: name 'router' is not defined
+2026-03-02 19:30:18,316 [INFO] watchfiles.main: 8 changes detected
+2026-03-02 19:30:20,395 [INFO] watchfiles.main: 1 change detected
+WARNING:  WatchFiles detected changes in 'app.py'. Reloading...
+ Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from multiprocessing.spawn import spawn_main; spawn_main(parent_pid=2560, pipe_handle=1056)
+                                                  ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\spawn.py", line 131, in _main
+    prepare(preparation_data)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\spawn.py", line 246, in prepare
+    _fixup_main_from_path(data['init_main_from_path'])
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\multiprocessing\spawn.py", line 297, in _fixup_main_from_path
+    main_content = runpy.run_path(main_path,
+                                  run_name="__mp_main__")
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "d:\AGI\autonomous_learning_system\app.py", line 136, in <module>
+    app = create_app()
+  File "d:\AGI\autonomous_learning_system\app.py", line 123, in create_app
+    app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
+                         ^^^^^^^^^^^
+NameError: name 'StaticFiles' is not defined
+2026-03-02 19:30:24,500 [INFO] watchfiles.main: 1 change detected
+WARNING:  WatchFiles detected changes in 'app.py'. Reloading...
+ INFO:     Started server process [25116]
+INFO:     Waiting for application startup.
+ERROR:    Traceback (most recent call last):
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\routing.py", line 694, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fastapi\routing.py", line 153, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+               ~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fastapi\routing.py", line 153, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+               ~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\AGI\autonomous_learning_system\app.py", line 53, in lifespan
+    print("\U0001f680 正在启动系统...")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'gbk' codec can't encode character '\U0001f680' in position 0: illegal multibyte sequence
+
+ERROR:    Application startup failed. Exiting.
+2026-03-02 19:30:26,164 [INFO] watchfiles.main: 7 changes detected
+2026-03-02 19:30:28,079 [INFO] watchfiles.main: 2 changes detected
+WARNING:  WatchFiles detected changes in 'web_ui\__init__.py'. Reloading...
+ INFO:     Started server process [28184]
+INFO:     Waiting for application startup.
+ERROR:    Traceback (most recent call last):
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\routing.py", line 694, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fastapi\routing.py", line 153, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+               ~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fastapi\routing.py", line 153, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+               ~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\AGI\autonomous_learning_system\app.py", line 53, in lifespan
+    print("\U0001f680 正在启动系统...")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'gbk' codec can't encode character '\U0001f680' in position 0: illegal multibyte sequence
+
+ERROR:    Application startup failed. Exiting.
+2026-03-02 19:30:29,455 [INFO] watchfiles.main: 7 changes detected
+2026-03-02 19:30:30,821 [INFO] watchfiles.main: 1 change detected
+WARNING:  WatchFiles detected changes in 'web_ui\static\__init__.py'. Reloading...
+ 2026-03-02 19:30:31,236 [INFO] watchfiles.main: 1 change detected
+INFO:     Started server process [29508]
+INFO:     Waiting for application startup.
+ERROR:    Traceback (most recent call last):
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\routing.py", line 694, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fastapi\routing.py", line 153, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+               ~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fastapi\routing.py", line 153, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+               ~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\AGI\autonomous_learning_system\app.py", line 53, in lifespan
+    print("\U0001f680 正在启动系统...")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'gbk' codec can't encode character '\U0001f680' in position 0: illegal multibyte sequence
+
+ERROR:    Application startup failed. Exiting.
+2026-03-02 19:30:33,000 [INFO] watchfiles.main: 1 change detected
+WARNING:  WatchFiles detected changes in 'web_ui\static\css\__init__.py'. Reloading...
+ 2026-03-02 19:30:33,363 [INFO] watchfiles.main: 1 change detected
+INFO:     Started server process [16380]
+INFO:     Waiting for application startup.
+ERROR:    Traceback (most recent call last):
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\routing.py", line 694, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fastapi\routing.py", line 153, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+               ~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fastapi\routing.py", line 153, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+               ~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\AGI\autonomous_learning_system\app.py", line 53, in lifespan
+    print("\U0001f680 正在启动系统...")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'gbk' codec can't encode character '\U0001f680' in position 0: illegal multibyte sequence
+
+ERROR:    Application startup failed. Exiting.
+2026-03-02 19:30:35,233 [INFO] watchfiles.main: 1 change detected
+WARNING:  WatchFiles detected changes in 'web_ui\static\js\__init__.py'. Reloading...
+ 2026-03-02 19:30:35,647 [INFO] watchfiles.main: 1 change detected
+INFO:     Started server process [28348]
+INFO:     Waiting for application startup.
+ERROR:    Traceback (most recent call last):
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\routing.py", line 694, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fastapi\routing.py", line 153, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+               ~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fastapi\routing.py", line 153, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+               ~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\AGI\autonomous_learning_system\app.py", line 53, in lifespan
+    print("\U0001f680 正在启动系统...")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'gbk' codec can't encode character '\U0001f680' in position 0: illegal multibyte sequence
+
+ERROR:    Application startup failed. Exiting.
+2026-03-02 19:30:38,520 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:30:55,914 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:03,225 [INFO] watchfiles.main: 2 changes detected
+2026-03-02 19:31:10,136 [INFO] watchfiles.main: 1 change detected
+WARNING:  WatchFiles detected changes in 'verify_web_ui.py'. Reloading...
+ INFO:     Started server process [22380]
+INFO:     Waiting for application startup.
+ERROR:    Traceback (most recent call last):
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\routing.py", line 694, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fastapi\routing.py", line 153, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+               ~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fastapi\routing.py", line 153, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+               ~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\AGI\autonomous_learning_system\app.py", line 53, in lifespan
+    print("\U0001f680 正在启动系统...")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'gbk' codec can't encode character '\U0001f680' in position 0: illegal multibyte sequence
+
+ERROR:    Application startup failed. Exiting.
+2026-03-02 19:31:18,062 [INFO] watchfiles.main: 1 change detected
+WARNING:  WatchFiles detected changes in 'verify_web_ui.py'. Reloading...
+ INFO:     Started server process [13804]
+INFO:     Waiting for application startup.
+ERROR:    Traceback (most recent call last):
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\routing.py", line 694, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fastapi\routing.py", line 153, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+               ~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fastapi\routing.py", line 153, in merged_lifespan
+    async with original_context(app) as maybe_original_state:
+               ~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\mon37\AppData\Local\Python\pythoncore-3.14-64\Lib\contextlib.py", line 214, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\AGI\autonomous_learning_system\app.py", line 53, in lifespan
+    print("\U0001f680 正在启动系统...")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'gbk' codec can't encode character '\U0001f680' in position 0: illegal multibyte sequence
+
+ERROR:    Application startup failed. Exiting.
+2026-03-02 19:31:23,041 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:23,397 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:23,755 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:24,167 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:24,587 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:24,991 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:25,444 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:25,799 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:26,206 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:26,608 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:27,013 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:27,417 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:27,821 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:28,225 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:28,628 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:29,081 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:29,446 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:29,856 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:30,258 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:30,662 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:31,068 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:31,470 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:31,873 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:32,278 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:32,681 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:33,086 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:33,489 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:33,895 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:34,298 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:34,703 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:35,069 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:35,475 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:35,879 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:36,283 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:36,689 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:37,093 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:37,495 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:37,900 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:38,303 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:38,706 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:39,109 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:39,525 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:39,931 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:40,335 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:40,739 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:41,106 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:41,509 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:41,914 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:42,317 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:42,722 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:43,124 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:43,526 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:43,929 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:44,296 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:44,649 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:45,007 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:45,366 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:45,723 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:46,081 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:46,440 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:46,798 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:47,154 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:47,563 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:47,967 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:48,373 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:48,776 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:49,183 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:49,588 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:49,992 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:50,395 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:50,751 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:51,164 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:51,568 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:51,971 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:52,377 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:52,783 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:53,186 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:53,590 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:53,995 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:54,400 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:54,809 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:55,213 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:55,618 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:56,028 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:56,391 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:56,801 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:57,209 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:57,614 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:58,068 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:58,470 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:58,873 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:59,276 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:31:59,678 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:00,085 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:00,491 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:00,895 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:01,298 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:01,703 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:02,108 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:02,510 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:02,913 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:03,319 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:03,724 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:04,130 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:04,532 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:04,935 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:05,341 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:05,799 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:06,163 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:06,626 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:07,038 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:07,440 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:07,847 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:08,251 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:08,659 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:09,064 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:09,469 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:09,879 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:10,293 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:10,696 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:11,102 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:11,507 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:11,913 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:12,367 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:12,732 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:13,141 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:13,544 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:13,947 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:14,355 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:14,761 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:15,165 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:15,570 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:15,976 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:16,383 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:16,787 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:17,193 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:17,602 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:18,007 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:18,410 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:18,815 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:19,220 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:19,625 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:20,030 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:20,439 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:20,859 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:21,225 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:21,633 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:22,039 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:22,447 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:22,849 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:23,253 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:23,654 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:24,059 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:24,462 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:24,864 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:25,271 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:25,676 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:26,083 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:26,488 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:26,892 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:27,299 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:27,655 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:28,060 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:28,464 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:28,871 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:29,273 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:29,680 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:30,083 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:30,495 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:30,910 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:31,316 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:31,726 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:32,141 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:32,549 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:32,954 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:33,359 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:33,768 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:34,183 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:34,584 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:34,990 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:35,448 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:35,800 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:36,208 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:36,662 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:37,064 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:37,471 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:37,827 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:38,235 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:38,650 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:39,063 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:39,465 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:39,872 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:40,276 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:40,731 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:41,143 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:41,548 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:41,909 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:42,312 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:42,718 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:43,122 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:43,528 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:43,944 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:44,352 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:44,758 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:45,112 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:45,520 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:45,923 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:46,326 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:46,731 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:47,136 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:47,538 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:47,942 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:48,348 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:48,752 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:49,157 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:49,561 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:49,965 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:50,369 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:50,771 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:51,174 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:51,579 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:51,982 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:52,391 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:52,794 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:53,197 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:53,599 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:54,002 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:54,406 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:54,812 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:55,216 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:55,622 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:56,026 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:56,432 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:56,885 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:57,249 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:57,655 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:58,057 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:58,462 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:58,863 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:59,268 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:32:59,676 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:33:00,131 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:33:00,533 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:33:00,938 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:33:01,342 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:33:01,747 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:33:02,152 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:33:02,558 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:33:02,964 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:33:03,370 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:33:03,775 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:33:04,179 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:33:04,581 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:33:04,987 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:33:05,391 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:33:05,794 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:33:06,198 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:33:06,603 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:33:07,007 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:33:07,410 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:33:07,813 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:33:08,214 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:33:08,620 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:33:08,975 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:33:09,384 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:33:09,786 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:33:10,194 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:33:10,601 [INFO] watchfiles.main: 1 change detected
+2026-03-02 19:33:11,003 [INFO] watchfiles.main: 1 change detected
