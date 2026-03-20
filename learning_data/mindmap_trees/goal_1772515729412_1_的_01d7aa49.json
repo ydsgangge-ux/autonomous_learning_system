@@ -1,0 +1,193 @@
+{
+  "goal_id": "goal_1772515729412_1",
+  "unit": "的",
+  "tree": {
+    "id": "node_1772515729414_1",
+    "title": "的",
+    "content": null,
+    "collected": false,
+    "collected_at": "",
+    "collected_by": "",
+    "depth": 0,
+    "importance": 0.5,
+    "node_type": "concept",
+    "parent_id": "",
+    "children": [
+      {
+        "id": "node_1772515729414_2",
+        "title": "读音",
+        "content": null,
+        "collected": false,
+        "collected_at": "",
+        "collected_by": "",
+        "depth": 1,
+        "importance": 1.0,
+        "node_type": "fact",
+        "parent_id": "node_1772515729414_1",
+        "children": []
+      },
+      {
+        "id": "node_1772515729414_3",
+        "title": "字形",
+        "content": null,
+        "collected": false,
+        "collected_at": "",
+        "collected_by": "",
+        "depth": 1,
+        "importance": 0.9,
+        "node_type": "concept",
+        "parent_id": "node_1772515729414_1",
+        "children": [
+          {
+            "id": "node_1772515729414_4",
+            "title": "笔画",
+            "content": null,
+            "collected": false,
+            "collected_at": "",
+            "collected_by": "",
+            "depth": 2,
+            "importance": 0.8,
+            "node_type": "fact",
+            "parent_id": "node_1772515729414_3",
+            "children": []
+          },
+          {
+            "id": "node_1772515729414_5",
+            "title": "部首",
+            "content": null,
+            "collected": false,
+            "collected_at": "",
+            "collected_by": "",
+            "depth": 2,
+            "importance": 0.8,
+            "node_type": "fact",
+            "parent_id": "node_1772515729414_3",
+            "children": []
+          },
+          {
+            "id": "node_1772515729414_6",
+            "title": "结构",
+            "content": null,
+            "collected": false,
+            "collected_at": "",
+            "collected_by": "",
+            "depth": 2,
+            "importance": 0.6,
+            "node_type": "fact",
+            "parent_id": "node_1772515729414_3",
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "node_1772515729414_7",
+        "title": "含义",
+        "content": null,
+        "collected": false,
+        "collected_at": "",
+        "collected_by": "",
+        "depth": 1,
+        "importance": 1.0,
+        "node_type": "concept",
+        "parent_id": "node_1772515729414_1",
+        "children": []
+      },
+      {
+        "id": "node_1772515729414_8",
+        "title": "用法",
+        "content": null,
+        "collected": false,
+        "collected_at": "",
+        "collected_by": "",
+        "depth": 1,
+        "importance": 0.9,
+        "node_type": "concept",
+        "parent_id": "node_1772515729414_1",
+        "children": [
+          {
+            "id": "node_1772515729414_9",
+            "title": "组词",
+            "content": null,
+            "collected": false,
+            "collected_at": "",
+            "collected_by": "",
+            "depth": 2,
+            "importance": 0.9,
+            "node_type": "example",
+            "parent_id": "node_1772515729414_8",
+            "children": []
+          },
+          {
+            "id": "node_1772515729414_10",
+            "title": "例句",
+            "content": null,
+            "collected": false,
+            "collected_at": "",
+            "collected_by": "",
+            "depth": 2,
+            "importance": 0.7,
+            "node_type": "example",
+            "parent_id": "node_1772515729414_8",
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "node_1772515729414_11",
+        "title": "记忆方法",
+        "content": null,
+        "collected": false,
+        "collected_at": "",
+        "collected_by": "",
+        "depth": 1,
+        "importance": 0.7,
+        "node_type": "skill",
+        "parent_id": "node_1772515729414_1",
+        "children": []
+      },
+      {
+        "id": "node_1772515729414_12",
+        "title": "关联",
+        "content": null,
+        "collected": false,
+        "collected_at": "",
+        "collected_by": "",
+        "depth": 1,
+        "importance": 0.5,
+        "node_type": "concept",
+        "parent_id": "node_1772515729414_1",
+        "children": [
+          {
+            "id": "node_1772515729414_13",
+            "title": "形近字",
+            "content": null,
+            "collected": false,
+            "collected_at": "",
+            "collected_by": "",
+            "depth": 2,
+            "importance": 0.6,
+            "node_type": "concept",
+            "parent_id": "node_1772515729414_12",
+            "children": []
+          },
+          {
+            "id": "node_1772515729414_14",
+            "title": "同音字",
+            "content": null,
+            "collected": false,
+            "collected_at": "",
+            "collected_by": "",
+            "depth": 2,
+            "importance": 0.5,
+            "node_type": "concept",
+            "parent_id": "node_1772515729414_12",
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "saved_at": "2026-03-03T13:28:49.415038",
+  "completion_rate": 0.0,
+  "_updated_at": "2026-03-03T13:28:49.415517"
+}

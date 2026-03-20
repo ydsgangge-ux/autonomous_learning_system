@@ -1,0 +1,86 @@
+{
+  "goal_id": "goal_1773645378202_1",
+  "unit": "抽纸的制作工艺",
+  "tree": {
+    "id": "node_1773645430798_1",
+    "title": "抽纸的制作工艺",
+    "content": null,
+    "collected": false,
+    "collected_at": "",
+    "collected_by": "",
+    "depth": 0,
+    "importance": 0.5,
+    "node_type": "concept",
+    "parent_id": "",
+    "children": [
+      {
+        "id": "node_1773645430798_2",
+        "title": "定义",
+        "content": null,
+        "collected": false,
+        "collected_at": "",
+        "collected_by": "",
+        "depth": 1,
+        "importance": 1.0,
+        "node_type": "concept",
+        "parent_id": "node_1773645430798_1",
+        "children": []
+      },
+      {
+        "id": "node_1773645430798_3",
+        "title": "核心要点",
+        "content": null,
+        "collected": false,
+        "collected_at": "",
+        "collected_by": "",
+        "depth": 1,
+        "importance": 0.9,
+        "node_type": "concept",
+        "parent_id": "node_1773645430798_1",
+        "children": []
+      },
+      {
+        "id": "node_1773645430798_4",
+        "title": "具体例子",
+        "content": null,
+        "collected": false,
+        "collected_at": "",
+        "collected_by": "",
+        "depth": 1,
+        "importance": 0.8,
+        "node_type": "example",
+        "parent_id": "node_1773645430798_1",
+        "children": []
+      },
+      {
+        "id": "node_1773645430798_5",
+        "title": "应用场景",
+        "content": null,
+        "collected": false,
+        "collected_at": "",
+        "collected_by": "",
+        "depth": 1,
+        "importance": 0.7,
+        "node_type": "skill",
+        "parent_id": "node_1773645430798_1",
+        "children": []
+      },
+      {
+        "id": "node_1773645430798_6",
+        "title": "记忆方法",
+        "content": null,
+        "collected": false,
+        "collected_at": "",
+        "collected_by": "",
+        "depth": 1,
+        "importance": 0.6,
+        "node_type": "skill",
+        "parent_id": "node_1773645430798_1",
+        "children": []
+      }
+    ]
+  },
+  "saved_at": "2026-03-16T15:17:10.798126",
+  "completion_rate": 0.0,
+  "_updated_at": "2026-03-16T15:17:10.798251"
+}

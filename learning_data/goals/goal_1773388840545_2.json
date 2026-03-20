@@ -1,0 +1,13 @@
+{
+  "id": "goal_1773388840545_2",
+  "description": "苹果的种类",
+  "goal_type": "general",
+  "status": "active",
+  "scale": "medium",
+  "difficulty": "medium",
+  "estimated_units": 0,
+  "created_at": "2026-03-13T16:00:40.545901",
+  "updated_at": "2026-03-13T16:00:40.545910",
+  "meta": {},
+  "_updated_at": "2026-03-13T16:00:40.546159"
+}

@@ -1,0 +1,86 @@
+{
+  "goal_id": "goal_1773385751426_1",
+  "unit": "学习火腿肠",
+  "tree": {
+    "id": "node_1773385751442_1",
+    "title": "学习火腿肠",
+    "content": "抱歉，我现在无法回答。",
+    "collected": true,
+    "collected_at": "2026-03-13T15:09:31.693618",
+    "collected_by": "llm:doubao-seed-1-8-251228",
+    "depth": 0,
+    "importance": 0.5,
+    "node_type": "concept",
+    "parent_id": "",
+    "children": [
+      {
+        "id": "node_1773385751442_2",
+        "title": "定义",
+        "content": "抱歉，我现在无法回答。",
+        "collected": true,
+        "collected_at": "2026-03-13T15:09:30.180036",
+        "collected_by": "llm:doubao-seed-1-8-251228",
+        "depth": 1,
+        "importance": 1.0,
+        "node_type": "concept",
+        "parent_id": "node_1773385751442_1",
+        "children": []
+      },
+      {
+        "id": "node_1773385751442_3",
+        "title": "核心要点",
+        "content": "抱歉，我现在无法回答。",
+        "collected": true,
+        "collected_at": "2026-03-13T15:09:30.480772",
+        "collected_by": "llm:doubao-seed-1-8-251228",
+        "depth": 1,
+        "importance": 0.9,
+        "node_type": "concept",
+        "parent_id": "node_1773385751442_1",
+        "children": []
+      },
+      {
+        "id": "node_1773385751442_4",
+        "title": "具体例子",
+        "content": "抱歉，我现在无法回答。",
+        "collected": true,
+        "collected_at": "2026-03-13T15:09:30.782142",
+        "collected_by": "llm:doubao-seed-1-8-251228",
+        "depth": 1,
+        "importance": 0.8,
+        "node_type": "example",
+        "parent_id": "node_1773385751442_1",
+        "children": []
+      },
+      {
+        "id": "node_1773385751442_5",
+        "title": "应用场景",
+        "content": "抱歉，我现在无法回答。",
+        "collected": true,
+        "collected_at": "2026-03-13T15:09:31.083060",
+        "collected_by": "llm:doubao-seed-1-8-251228",
+        "depth": 1,
+        "importance": 0.7,
+        "node_type": "skill",
+        "parent_id": "node_1773385751442_1",
+        "children": []
+      },
+      {
+        "id": "node_1773385751442_6",
+        "title": "记忆方法",
+        "content": "抱歉，我现在无法回答。",
+        "collected": true,
+        "collected_at": "2026-03-13T15:09:31.384650",
+        "collected_by": "llm:doubao-seed-1-8-251228",
+        "depth": 1,
+        "importance": 0.6,
+        "node_type": "skill",
+        "parent_id": "node_1773385751442_1",
+        "children": []
+      }
+    ]
+  },
+  "saved_at": "2026-03-13T15:09:31.994395",
+  "completion_rate": 1.0,
+  "_updated_at": "2026-03-13T15:09:31.994649"
+}

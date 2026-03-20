@@ -1,0 +1,86 @@
+{
+  "goal_id": "goal_1773388824875_1",
+  "unit": "主流鲜食型苹果品种特征与产地（红富士、嘎啦果、花牛苹果等）",
+  "tree": {
+    "id": "node_1773388840539_7",
+    "title": "主流鲜食型苹果品种特征与产地（红富士、嘎啦果、花牛苹果等）",
+    "content": null,
+    "collected": false,
+    "collected_at": "",
+    "collected_by": "",
+    "depth": 0,
+    "importance": 0.5,
+    "node_type": "concept",
+    "parent_id": "",
+    "children": [
+      {
+        "id": "node_1773388840539_8",
+        "title": "定义",
+        "content": null,
+        "collected": false,
+        "collected_at": "",
+        "collected_by": "",
+        "depth": 1,
+        "importance": 1.0,
+        "node_type": "concept",
+        "parent_id": "node_1773388840539_7",
+        "children": []
+      },
+      {
+        "id": "node_1773388840539_9",
+        "title": "核心要点",
+        "content": null,
+        "collected": false,
+        "collected_at": "",
+        "collected_by": "",
+        "depth": 1,
+        "importance": 0.9,
+        "node_type": "concept",
+        "parent_id": "node_1773388840539_7",
+        "children": []
+      },
+      {
+        "id": "node_1773388840539_10",
+        "title": "具体例子",
+        "content": null,
+        "collected": false,
+        "collected_at": "",
+        "collected_by": "",
+        "depth": 1,
+        "importance": 0.8,
+        "node_type": "example",
+        "parent_id": "node_1773388840539_7",
+        "children": []
+      },
+      {
+        "id": "node_1773388840539_11",
+        "title": "应用场景",
+        "content": null,
+        "collected": false,
+        "collected_at": "",
+        "collected_by": "",
+        "depth": 1,
+        "importance": 0.7,
+        "node_type": "skill",
+        "parent_id": "node_1773388840539_7",
+        "children": []
+      },
+      {
+        "id": "node_1773388840539_12",
+        "title": "记忆方法",
+        "content": null,
+        "collected": false,
+        "collected_at": "",
+        "collected_by": "",
+        "depth": 1,
+        "importance": 0.6,
+        "node_type": "skill",
+        "parent_id": "node_1773388840539_7",
+        "children": []
+      }
+    ]
+  },
+  "saved_at": "2026-03-13T16:00:40.539158",
+  "completion_rate": 0.0,
+  "_updated_at": "2026-03-13T16:00:40.539365"
+}
