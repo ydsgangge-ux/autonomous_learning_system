@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自主智能学习系统</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- 顶部导航 -->
+        <header>
+            <div class="container">
+                <h1 class="logo">🧠 自主智能学习系统</h1>
+                <nav class="nav">
+                    <button class="nav-btn active" data-page="home">首页</button>
+                    <button class="nav-btn" data-page="goals">学习目标</button>
+                    <button class="nav-btn" data-page="cards">知识卡片</button>
+                    <button class="nav-btn" data-page="quiz">测试练习</button>
+                    <button class="nav-btn" data-page="progress">学习进度</button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- 主内容区 -->
+        <main class="container">
+            <!-- 首页 -->
+            <section id="page-home" class="page active">
+                <div class="welcome-card">
+                    <h2>欢迎使用自主智能学习系统</h2>
+                    <p>基于 SM-2 间隔重复算法的智能学习管理系统</p>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number" id="stat-goals">0</div>
+                            <div class="stat-label">学习目标</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="stat-cards">0</div>
+                            <div class="stat-label">知识卡片</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="stat-mastered">0</div>
+                            <div class="stat-label">已掌握</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 学习目标页面 -->
+            <section id="page-goals" class="page">
+                <div class="page-header">
+                    <h2>学习目标</h2>
+                    <button class="btn btn-primary" onclick="showCreateGoalModal()">
+                        + 创建目标
+                    </button>
+                </div>
+                <div id="goals-list" class="goals-list"></div>
+            </section>
+
+            <!-- 知识卡片页面 -->
+            <section id="page-cards" class="page">
+                <div class="page-header">
+                    <h2>知识卡片</h2>
+                    <select id="goal-filter" class="select" onchange="loadCards()">
+                        <option value="">所有目标</option>
+                    </select>
+                </div>
+                <div id="cards-list" class="cards-grid"></div>
+            </section>
+
+            <!-- 测试练习页面 -->
+            <section id="page-quiz" class="page">
+                <div class="page-header">
+                    <h2>测试练习</h2>
+                    <button class="btn btn-primary" onclick="generateQuiz()">
+                        生成测试题
+                    </button>
+                </div>
+                <div id="quiz-area"></div>
+            </section>
+
+            <!-- 学习进度页面 -->
+            <section id="page-progress" class="page">
+                <div class="page-header">
+                    <h2>学习进度</h2>
+                    <select id="progress-goal-filter" class="select" onchange="loadProgress()">
+                        <option value="">选择目标</option>
+                    </select>
+                </div>
+                <div id="progress-area"></div>
+            </section>
+        </main>
+
+        <!-- 创建目标模态框 -->
+        <div id="modal-create-goal" class="modal">
+            <div class="modal-content">
+                <h3>创建学习目标</h3>
+                <form onsubmit="createGoal(event)">
+                    <div class="form-group">
+                        <label>学习目标描述</label>
+                        <input type="text" id="goal-description" class="input"
+                               placeholder="例如：学习10个汉字"
+                               required>
+                    </div>
+                    <div class="form-tips">
+                        <p>示例：</p>
+                        <ul>
+                            <li>学习5个英语单词</li>
+                            <li>学习3个Python函数</li>
+                            <li>学习2个数学概念</li>
+                            <li>学习10个汉字</li>
+                        </ul>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="submit" class="btn btn-primary">创建</button>
+                        <button type="button" class="btn" onclick="closeModal('modal-create-goal')">取消</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- 加载提示 -->
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>加载中...</p>
+        </div>
+
+        <!-- 消息提示 -->
+        <div id="toast" class="toast"></div>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

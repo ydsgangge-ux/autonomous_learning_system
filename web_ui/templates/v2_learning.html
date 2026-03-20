@@ -1,0 +1,3275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自主认知学习系统 v3.2</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* 顶部导航 */
+        .header {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary), #818cf8);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 4px;
+        }
+
+        .nav-btn {
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            color: var(--text-light);
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        .nav-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* 主内容区 */
+        .main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px;
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 24px;
+        }
+
+        @media (max-width: 1024px) {
+            .main {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* 卡片 */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* 按钮 */
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .btn-outline:hover {
+            background: var(--bg);
+        }
+
+        .btn-sm {
+            padding: 4px 10px;
+            font-size: 12px;
+        }
+
+        /* 输入框 */
+        .input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        /* 问答区 */
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 180px);
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .message {
+            padding: 12px 16px;
+            border-radius: 12px;
+            max-width: 85%;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message-user {
+            background: var(--primary);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message-system {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        .message-source {
+            font-size: 11px;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+
+        .message-source.new {
+            color: var(--success);
+        }
+
+        .message-source.stored {
+            color: var(--primary);
+        }
+
+        .chat-input-area {
+            display: flex;
+            gap: 12px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .chat-input {
+            flex: 1;
+        }
+
+        /* 目标列表 */
+        .goals-grid {
+            display: grid;
+            gap: 12px;
+        }
+
+        .goal-card {
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .goal-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 2px 8px rgba(79, 70, 229, 0.1);
+        }
+
+        .goal-card.active {
+            border-color: var(--primary);
+            background: rgba(79, 70, 229, 0.05);
+        }
+
+        .goal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 8px;
+        }
+
+        .btn-delete {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 16px;
+            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .btn-delete:hover {
+            color: var(--danger);
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .goal-title {
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .goal-badge {
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: var(--bg);
+            color: var(--text-light);
+        }
+
+        .goal-badge.active {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        .goal-progress {
+            margin-top: 12px;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: var(--bg);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), #818cf8);
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+
+        .progress-text {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 4px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* 进化进度步骤 */
+        .progress-steps {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .progress-step {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            background: var(--bg);
+            border-radius: 20px;
+            font-size: 13px;
+            color: var(--text-light);
+            transition: all 0.3s;
+        }
+        
+        .progress-step.active {
+            background: #fef3c7;
+            color: #b45309;
+        }
+        
+        .progress-step.completed {
+            background: #d1fae5;
+            color: #047857;
+        }
+        
+        .step-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .progress-step.active .step-icon {
+            background: #f59e0b;
+            color: white;
+        }
+        
+        .progress-step.completed .step-icon {
+            background: #10b981;
+            color: white;
+        }
+
+        /* 知识树 */
+        .tree-view {
+            font-size: 13px;
+        }
+
+        .tree-node {
+            padding: 4px 0;
+        }
+
+        .tree-node-title {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .tree-node-title:hover {
+            background: var(--bg);
+        }
+
+        .tree-icon {
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+
+        .tree-icon.collected {
+            color: var(--success);
+        }
+
+        .tree-icon.uncollected {
+            color: var(--text-light);
+        }
+
+        .tree-children {
+            padding-left: 20px;
+        }
+
+        .tree-content {
+            padding: 8px 12px;
+            margin: 4px 0 8px 24px;
+            background: var(--bg);
+            border-radius: 6px;
+            font-size: 12px;
+            color: var(--text);
+        }
+
+        /* 统计卡片 */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: var(--bg);
+            padding: 16px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+
+        /* 测验 */
+        .quiz-card {
+            padding: 20px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 16px;
+        }
+
+        .quiz-question {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .quiz-answer {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .quiz-result {
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 12px;
+            display: none;
+        }
+
+        .quiz-result.correct {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        .quiz-result.wrong {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+        }
+
+        /* 上下文面板 */
+        .context-panel {
+            background: var(--bg);
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            margin-bottom: 16px;
+        }
+
+        .context-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+        }
+
+        .context-label {
+            color: var(--text-light);
+        }
+
+        /* 加载动画 */
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            color: var(--text-light);
+        }
+
+        .spinner {
+            width: 24px;
+            height: 24px;
+            border: 3px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 12px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* 提示消息 */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            padding: 12px 20px;
+            background: var(--text);
+            color: white;
+            border-radius: 8px;
+            font-size: 14px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .toast.success {
+            background: var(--success);
+        }
+
+        .toast.error {
+            background: var(--danger);
+        }
+
+        /* 模态框 */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .modal-body {
+            margin-bottom: 20px;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+
+        .form-hint {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+
+        /* 示例标签 */
+        .examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .example-tag {
+            padding: 4px 10px;
+            background: var(--bg);
+            border-radius: 6px;
+            font-size: 12px;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .example-tag:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* 侧边栏 */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* 知识单元列表 */
+        .units-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .unit-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .unit-item:hover {
+            background: var(--bg);
+        }
+
+        .unit-item.learned {
+            color: var(--success);
+        }
+
+        .unit-status {
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: var(--bg);
+        }
+
+        .unit-status.done {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        /* 历史记录 */
+        .history-list {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 12px;
+        }
+
+        .history-item:last-child {
+            border-bottom: none;
+        }
+
+        .history-q {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .history-a {
+            color: var(--text-light);
+            margin-top: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">🧠</div>
+                <span>自主认知学习系统 v3.2</span>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn active" data-page="chat">问答</button>
+                <button class="nav-btn" data-page="goals">目标管理</button>
+                <button class="nav-btn" data-page="knowledge">知识树</button>
+                <button class="nav-btn" data-page="quiz">测验</button>
+                <button class="nav-btn" data-page="causality">因果推理</button>
+                <button class="nav-btn" data-page="synthesis">跨域融合</button>
+                <button class="nav-btn" data-page="verification">知识验证</button>
+                <button class="nav-btn" data-page="sandbox">沙盒实验</button>
+                <button class="nav-btn" data-page="perception">感知系统</button>
+                <button class="nav-btn" data-page="exploration">知识探索</button>
+                <button class="nav-btn" data-page="planning">学习规划</button>
+                <button class="nav-btn" data-page="evolution" style="color: var(--primary); font-weight: 600;">⚡ AGI进化</button>
+                <button class="nav-btn" data-page="stats">统计</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="main">
+        <!-- 左侧：主功能区 -->
+        <div class="content">
+            <!-- 问答页面 -->
+            <section id="page-chat" class="page active">
+                <div class="card chat-container">
+                    <!-- 上下文信息 -->
+                    <div class="context-panel" id="chat-context">
+                        <div class="context-item">
+                            <span class="context-label">当前目标：</span>
+                            <span id="current-goal-name">未选择</span>
+                        </div>
+                        <div class="context-item">
+                            <span class="context-label">当前话题：</span>
+                            <span id="current-topic">无</span>
+                        </div>
+                    </div>
+
+                    <!-- 消息列表 -->
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="message message-system">
+                            欢迎使用自主认知学习系统！<br><br>
+                            我可以帮你学习知识，记住你问过的内容。<br>
+                            <b>直接提问</b>，如："蠢字怎么读"、"它有几画"<br>
+                            或使用命令：<br>
+                            • <code>new 学习10个汉字</code> - 创建目标<br>
+                            • <code>learn</code> - 批量学习<br>
+                            • <code>quiz</code> - 开始测验
+                        </div>
+                    </div>
+
+                    <!-- 输入区 -->
+                    <div class="chat-input-area">
+                        <input type="text" class="input chat-input" id="chat-input" 
+                               placeholder="输入问题或命令..." onkeypress="handleChatKeypress(event)">
+                        <button class="btn btn-primary" onclick="sendMessage()">发送</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 目标管理页面 -->
+            <section id="page-goals" class="page">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">学习目标</h3>
+                        <button class="btn btn-primary" onclick="showCreateGoalModal()">+ 新建目标</button>
+                    </div>
+                    
+                    <!-- 进行中的目标 -->
+                    <h4 style="margin: 16px 0 12px; color: var(--text-light);">进行中</h4>
+                    <div class="goals-grid" id="goals-active-list">
+                        <div class="loading"><div class="spinner"></div>加载中...</div>
+                    </div>
+                    
+                    <!-- 已完成的目标 -->
+                    <h4 style="margin: 24px 0 12px; color: var(--text-light); border-top: 1px solid var(--border); padding-top: 16px;">
+                        已完成
+                    </h4>
+                    <div class="goals-grid" id="goals-completed-list">
+                        <p style="color: var(--text-light); text-align: center; padding: 20px;">暂无已完成的目标</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 知识树页面 -->
+            <section id="page-knowledge" class="page">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">知识树</h3>
+                        <select class="input" id="unit-select" style="width: auto;" onchange="loadKnowledgeTree()">
+                            <option value="">选择知识单元</option>
+                        </select>
+                    </div>
+                    <div id="tree-view">
+                        <p style="color: var(--text-light); text-align: center; padding: 40px;">
+                            请先选择一个知识单元查看
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 测验页面 -->
+            <section id="page-quiz" class="page">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">知识测验</h3>
+                        <button class="btn btn-primary" onclick="startQuiz()">开始测验</button>
+                    </div>
+                    <div id="quiz-area">
+                        <p style="color: var(--text-light); text-align: center; padding: 40px;">
+                            点击"开始测验"按钮，随机测试已学过的知识
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 因果推理页面 -->
+            <section id="page-causality" class="page">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">因果推理引擎</h3>
+                        <button class="btn btn-primary" onclick="extractCausality()">提取因果</button>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">输入文本（提取因果关系）</label>
+                        <textarea class="input" id="causal-input" rows="4" placeholder="例如：当模具温度升高时，原材料的粘度会下降，流动性增加，从而影响产品成型质量..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">上下文领域</label>
+                        <input type="text" class="input" id="causal-context" placeholder="例如：注塑工艺">
+                    </div>
+
+                    <div id="causal-result" style="display: none;">
+                        <h4 style="margin: 16px 0 8px;">提取结果</h4>
+                        <div id="causal-chains" style="font-size: 13px; color: var(--text-light);"></div>
+                    </div>
+
+                    <div style="margin-top: 20px; border-top: 1px solid var(--border); padding-top: 16px;">
+                        <h4 style="margin-bottom: 12px;">反事实推理</h4>
+                        <div class="form-group">
+                            <label class="form-label">查询节点</label>
+                            <div style="display: flex; gap: 8px;">
+                                <input type="text" class="input" id="counterfactual-node" placeholder="例如：模具温度">
+                                <button class="btn btn-outline" onclick="doCounterfactual()">查询</button>
+                            </div>
+                        </div>
+                        <div id="counterfactual-result" style="font-size: 13px; color: var(--text-light);"></div>
+                    </div>
+
+                    <div style="margin-top: 20px; border-top: 1px solid var(--border); padding-top: 16px;">
+                        <h4 style="margin-bottom: 12px;">因果缺口检测</h4>
+                        <div style="display: flex; gap: 8px;">
+                            <input type="text" class="input" id="gap-domain" placeholder="领域（可选）" style="flex: 1;">
+                            <button class="btn btn-outline" onclick="detectGaps()">检测缺口</button>
+                        </div>
+                        <div id="gaps-result" style="margin-top: 12px; font-size: 13px;"></div>
+                    </div>
+
+                    <div style="margin-top: 20px; border-top: 1px solid var(--border); padding-top: 16px;">
+                        <button class="btn btn-outline" onclick="loadCausalStats()">查看统计</button>
+                        <button class="btn btn-outline" onclick="detectConflicts()">检测冲突</button>
+                        <div id="causal-stats" style="margin-top: 12px; font-size: 13px; color: var(--text-light);"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 跨域融合页面 -->
+            <section id="page-synthesis" class="page">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">跨域知识融合</h3>
+                        <button class="btn btn-primary" onclick="loadDomains()">刷新领域</button>
+                    </div>
+
+                    <div class="context-panel" style="margin-bottom: 16px;">
+                        <p style="font-size: 13px; color: var(--text-light);">
+                            跨域融合是AGI的核心能力——将"注塑压力"与"音频包络"、将"线束应力"与"弦乐张力"联系起来，
+                            透过现象看本质，揭示不同领域的深层共性。
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">核心概念</label>
+                        <input type="text" class="input" id="synthesis-concept" placeholder="例如：注塑保压、压力控制、应力分布">
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <div class="form-group">
+                            <label class="form-label">源领域</label>
+                            <select class="input" id="synthesis-source-domain">
+                                <option value="">选择领域</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">目标领域</label>
+                            <select class="input" id="synthesis-target-domain">
+                                <option value="">选择领域</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">上下文（可选）</label>
+                        <input type="text" class="input" id="synthesis-context" placeholder="额外说明">
+                    </div>
+
+                    <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+                        <button class="btn btn-primary" onclick="generateAnalogy()">生成类比</button>
+                        <button class="btn btn-outline" onclick="autoSynthesize()">自动融合</button>
+                        <button class="btn btn-outline" onclick="randomInsight()">随机洞见</button>
+                    </div>
+
+                    <div id="synthesis-result" style="display: none;">
+                        <h4 style="margin: 16px 0 12px;">融合结果</h4>
+                        <div id="synthesis-output"></div>
+                    </div>
+
+                    <!-- 已有桥接 -->
+                    <div style="margin-top: 24px; border-top: 1px solid var(--border); padding-top: 16px;">
+                        <h4 style="margin-bottom: 12px;">已有跨域桥接</h4>
+                        <div id="bridges-list" style="font-size: 13px;"></div>
+                    </div>
+
+                    <!-- 统计 -->
+                    <div style="margin-top: 20px; border-top: 1px solid var(--border); padding-top: 16px;">
+                        <button class="btn btn-outline" onclick="loadSynthesisStats()">查看统计</button>
+                        <div id="synthesis-stats" style="margin-top: 12px;"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 知识验证页面 -->
+            <section id="page-verification" class="page">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">知识验证系统</h3>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">待验证的知识内容</label>
+                        <textarea class="input" id="verify-content" rows="3" placeholder="例如：R = ρ * L / A（电阻计算公式）"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">知识类型</label>
+                        <select class="input" id="verify-type">
+                            <option value="formula">公式</option>
+                            <option value="logic">逻辑</option>
+                            <option value="calculation">计算</option>
+                            <option value="code">代码</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">上下文</label>
+                        <input type="text" class="input" id="verify-context" placeholder="例如：电阻计算">
+                    </div>
+
+                    <button class="btn btn-primary" onclick="verifyKnowledge()">验证知识</button>
+
+                    <div id="verify-result" style="margin-top: 20px; display: none;">
+                        <div class="quiz-card" style="margin: 0;">
+                            <div id="verify-output"></div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 24px; border-top: 1px solid var(--border); padding-top: 16px;">
+                        <h4 style="margin-bottom: 12px;">假设验证</h4>
+                        <div class="form-group">
+                            <label class="form-label">科学假设</label>
+                            <textarea class="input" id="hypothesis-input" rows="2" placeholder="例如：当温度升高时，金属的电阻会增加"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">领域</label>
+                            <select class="input" id="hypothesis-domain">
+                                <option value="physics">物理学</option>
+                                <option value="chemistry">化学</option>
+                                <option value="math">数学</option>
+                                <option value="general">通用</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-outline" onclick="verifyHypothesis()">验证假设</button>
+                        <div id="hypothesis-result" style="margin-top: 12px; font-size: 13px; color: var(--text-light);"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 沙盒实验页面 -->
+            <section id="page-sandbox" class="page">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">沙盒实验环境</h3>
+                        <span style="font-size: 12px; color: var(--text-light);">安全代码执行环境</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Python 代码</label>
+                        <textarea class="input" id="sandbox-code" rows="8" style="font-family: monospace;" placeholder="# 在沙盒中执行代码
+result = 2 + 2
+print(f'2 + 2 = {result}')
+
+# 测试函数
+def double(x):
+    return x * 2
+
+print(f'double(5) = {double(5)}')"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">输入参数（可选，JSON格式）</label>
+                        <input type="text" class="input" id="sandbox-inputs" placeholder='{"value": 5}'>
+                    </div>
+
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn btn-primary" onclick="runSandbox()">执行代码</button>
+                        <button class="btn btn-outline" onclick="clearSandbox()">清空</button>
+                    </div>
+
+                    <div id="sandbox-result" style="margin-top: 20px; display: none;">
+                        <h4 style="margin-bottom: 8px;">执行结果</h4>
+                        <pre id="sandbox-output" style="background: var(--bg); padding: 12px; border-radius: 8px; font-family: monospace; font-size: 13px; white-space: pre-wrap; overflow-x: auto;"></pre>
+                        <div id="sandbox-error" style="color: var(--danger); font-size: 13px; margin-top: 8px;"></div>
+                    </div>
+
+                    <div style="margin-top: 24px; border-top: 1px solid var(--border); padding-top: 16px;">
+                        <h4 style="margin-bottom: 12px;">使用示例</h4>
+                        <div class="examples">
+                            <span class="example-tag" onclick="loadSandboxExample('math')">数学计算</span>
+                            <span class="example-tag" onclick="loadSandboxExample('list')">列表操作</span>
+                            <span class="example-tag" onclick="loadSandboxExample('function')">函数定义</span>
+                            <span class="example-tag" onclick="loadSandboxExample('json')">JSON处理</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 感知系统页面 -->
+            <section id="page-perception" class="page">
+                <div class="card">
+                    <h3 class="card-title">感知系统</h3>
+                    <p style="color: var(--text-light); margin-bottom: 16px;">
+                        感知系统从多种来源获取信息，包括网页内容、文档解析、URL摄入等
+                    </p>
+                    
+                    <div class="form-group">
+                        <label class="form-label">摄入来源</label>
+                        <select class="input" id="perception-source">
+                            <option value="url">网页URL</option>
+                            <option value="text">文本内容</option>
+                            <option value="file">文件上传</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="perception-url-group">
+                        <label class="form-label">输入URL</label>
+                        <input type="text" class="input" id="perception-url" placeholder="https://example.com">
+                    </div>
+
+                    <div class="form-group" id="perception-text-group" style="display: none;">
+                        <label class="form-label">输入文本</label>
+                        <textarea class="input" id="perception-text" rows="6" placeholder="输入需要感知的内容..."></textarea>
+                    </div>
+
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn btn-primary" onclick="ingestPerception()">摄入内容</button>
+                        <button class="btn btn-outline" onclick="clearPerception()">清空</button>
+                    </div>
+
+                    <div id="perception-result" style="margin-top: 20px; display: none;">
+                        <h4 style="margin-bottom: 8px;">感知结果</h4>
+                        <div id="perception-output" style="background: var(--bg); padding: 12px; border-radius: 8px; font-size: 13px; white-space: pre-wrap;"></div>
+                    </div>
+
+                    <div style="margin-top: 24px; border-top: 1px solid var(--border); padding-top: 16px;">
+                        <h4 style="margin-bottom: 12px;">功能说明</h4>
+                        <div class="examples">
+                            <span class="example-tag" onclick="loadPerceptionExample('news')">新闻摄入</span>
+                            <span class="example-tag" onclick="loadPerceptionExample('doc')">文档解析</span>
+                            <span class="example-tag" onclick="loadPerceptionExample('api')">API数据</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 知识探索页面 -->
+            <section id="page-exploration" class="page">
+                <div class="card">
+                    <h3 class="card-title">知识探索</h3>
+                    <p style="color: var(--text-light); margin-bottom: 16px;">
+                        主动探索未知领域，发现知识缺口，构建学习路径
+                    </p>
+                    
+                    <div class="form-group">
+                        <label class="form-label">探索主题</label>
+                        <input type="text" class="input" id="exploration-topic" placeholder="输入想要探索的主题">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">探索深度</label>
+                        <select class="input" id="exploration-depth">
+                            <option value="shallow">浅层了解</option>
+                            <option value="medium" selected>中等深度</option>
+                            <option value="deep">深度研究</option>
+                        </select>
+                    </div>
+
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn btn-primary" onclick="startExploration()">开始探索</button>
+                        <button class="btn btn-outline" onclick="loadExplorationTasks()">查看任务</button>
+                    </div>
+
+                    <div id="exploration-result" style="margin-top: 20px; display: none;">
+                        <h4 style="margin-bottom: 8px;">探索结果</h4>
+                        <div id="exploration-output" style="background: var(--bg); padding: 12px; border-radius: 8px; font-size: 13px; white-space: pre-wrap;"></div>
+                    </div>
+
+                    <div style="margin-top: 24px;">
+                        <h4 style="margin-bottom: 12px;">探索任务列表</h4>
+                        <div id="exploration-tasks" style="background: var(--bg); padding: 12px; border-radius: 8px; font-size: 13px;">
+                            <p style="color: var(--text-light);">暂无探索任务</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 学习规划页面 -->
+            <section id="page-planning" class="page">
+                <div class="card">
+                    <h3 class="card-title">学习规划</h3>
+                    <p style="color: var(--text-light); margin-bottom: 16px;">
+                        基于SM-2算法智能安排学习计划和复习间隔
+                    </p>
+                    
+                    <div class="form-group">
+                        <label class="form-label">学习目标</label>
+                        <input type="text" class="input" id="planning-goal" placeholder="输入学习目标">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">目标类型</label>
+                        <select class="input" id="planning-type">
+                            <option value="new">新知识学习</option>
+                            <option value="review">复习已有知识</option>
+                            <option value="practice">技能练习</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">每日学习时间（分钟）</label>
+                        <input type="number" class="input" id="planning-time" value="30" min="10" max="240">
+                    </div>
+
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn btn-primary" onclick="createPlan()">创建计划</button>
+                        <button class="btn btn-outline" onclick="loadPlan()">查看计划</button>
+                    </div>
+
+                    <div id="planning-result" style="margin-top: 20px; display: none;">
+                        <h4 style="margin-bottom: 8px;">学习计划</h4>
+                        <div id="planning-output" style="background: var(--bg); padding: 12px; border-radius: 8px; font-size: 13px; white-space: pre-wrap;"></div>
+                    </div>
+
+                    <div style="margin-top: 24px;">
+                        <h4 style="margin-bottom: 12px;">复习提醒（SM-2间隔）</h4>
+                        <div id="review-list" style="background: var(--bg); padding: 12px; border-radius: 8px; font-size: 13px;">
+                            <p style="color: var(--text-light);">暂无复习任务</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 统计页面 -->
+            <section id="page-stats" class="page">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="stat-goals">0</div>
+                        <div class="stat-label">学习目标</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="stat-units">0</div>
+                        <div class="stat-label">知识单元</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="stat-completion">0%</div>
+                        <div class="stat-label">完成度</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">对话历史</h3>
+                    </div>
+                    <div class="history-list" id="history-list">
+                        <p style="color: var(--text-light); padding: 20px; text-align: center;">暂无对话记录</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AGI 进化页面 -->
+            <section id="page-evolution" class="page">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">🧬 AGI 进化引擎</h3>
+                        <button class="btn btn-primary" onclick="loadEvolutionDomains()">刷新领域</button>
+                    </div>
+
+                    <div class="context-panel" style="margin-bottom: 16px; background: linear-gradient(135deg, #f0f9ff, #e0f2fe);">
+                        <p style="font-size: 13px; color: #0369a1;">
+                            <strong>一键进化：</strong>将碎片信息经历完整的"逻辑洗礼" → 因果提取 → 沙盒验证 → 跨域合成 → 元认知审计
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">原始输入（待进化内容）</label>
+                        <textarea class="input" id="evolution-input" rows="4" 
+                            placeholder="例如：注塑压力过大会导致线束末端溢料。当保压压力超过15MPa时，熔体容易从模具分型面溢出，形成飞边。"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">目标领域</label>
+                        <select class="input" id="evolution-domain">
+                            <option value="工业制造">工业制造</option>
+                            <option value="声学/音乐">声学/音乐</option>
+                            <option value="流体力学">流体力学</option>
+                            <option value="控制理论">控制理论</option>
+                            <option value="生物学">生物学</option>
+                            <option value="电子电路">电子电路</option>
+                            <option value="纺织/材料">纺织/材料</option>
+                            <option value="文学/艺术">文学/艺术</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">额外上下文（可选）</label>
+                        <input type="text" class="input" id="evolution-context" placeholder="额外说明或背景信息">
+                    </div>
+
+                    <div style="display: flex; gap: 8px; margin-bottom: 20px;">
+                        <button class="btn btn-primary" onclick="runEvolution()" style="font-size: 15px; padding: 12px 24px;">
+                            ⚡ 一键进化
+                        </button>
+                        <button class="btn btn-outline" onclick="clearEvolution()">清空</button>
+                    </div>
+
+                    <!-- 进化进度 -->
+                    <div id="evolution-progress" style="display: none;">
+                        <h4 style="margin-bottom: 12px;">进化进度</h4>
+                        <div class="progress-steps" style="display: flex; gap: 8px; margin-bottom: 20px;">
+                            <div class="progress-step" id="step-causality">
+                                <span class="step-icon">1</span>
+                                <span class="step-label">因果提取</span>
+                            </div>
+                            <div class="progress-step" id="step-sandbox">
+                                <span class="step-icon">2</span>
+                                <span class="step-label">沙盒验证</span>
+                            </div>
+                            <div class="progress-step" id="step-synthesis">
+                                <span class="step-icon">3</span>
+                                <span class="step-label">跨域合成</span>
+                            </div>
+                            <div class="progress-step" id="step-audit">
+                                <span class="step-icon">4</span>
+                                <span class="step-label">元认知审计</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 进化结果 -->
+                    <div id="evolution-result" style="display: none;">
+                        <h4 style="margin: 20px 0 12px;">🎯 进化结果</h4>
+                        
+                        <!-- 最终输出 -->
+                        <div class="result-section" style="background: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                <span style="font-weight: 600; color: #166534;">精炼后的知识</span>
+                                <span id="refinement-badge" style="font-size: 12px; background: #dcfce7; color: #166534; padding: 2px 8px; border-radius: 12px;"></span>
+                            </div>
+                            <p id="evolution-final-output" style="line-height: 1.6; color: #1e293b;"></p>
+                        </div>
+
+                        <!-- 各阶段结果 -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                            <!-- 因果逻辑 -->
+                            <div class="result-section" style="background: #fefce8; border: 1px solid #fde047; border-radius: 8px; padding: 12px;">
+                                <h5 style="color: #854d0e; margin-bottom: 8px;">🔗 因果逻辑链</h5>
+                                <div id="evolution-causality" style="font-size: 13px; color: #713f12;"></div>
+                            </div>
+
+                            <!-- 沙盒验证 -->
+                            <div class="result-section" style="background: #f0f9ff; border: 1px solid #7dd3fc; border-radius: 8px; padding: 12px;">
+                                <h5 style="color: #075985; margin-bottom: 8px;">🧪 沙盒验证</h5>
+                                <div id="evolution-verification" style="font-size: 13px; color: #0c4a6e;"></div>
+                            </div>
+
+                            <!-- 跨域洞察 -->
+                            <div class="result-section" style="background: #fdf4ff; border: 1px solid #f0abfc; border-radius: 8px; padding: 12px;">
+                                <h5 style="color: #86198f; margin-bottom: 8px;">🌉 跨域洞察</h5>
+                                <div id="evolution-synthesis" style="font-size: 13px; color: #701a75;"></div>
+                            </div>
+
+                            <!-- 元认知审计 -->
+                            <div class="result-section" style="background: #fff1f2; border: 1px solid #fda4af; border-radius: 8px; padding: 12px;">
+                                <h5 style="color: #9f1239; margin-bottom: 8px;">🔍 元认知审计</h5>
+                                <div id="evolution-audit" style="font-size: 13px; color: #881337;"></div>
+                            </div>
+                        </div>
+
+                        <!-- 处理信息 -->
+                        <div style="margin-top: 16px; padding: 12px; background: #f8fafc; border-radius: 6px; font-size: 12px; color: #64748b;">
+                            <span>处理耗时: </span><span id="evolution-time"></span>
+                            <span style="margin: 0 12px;">|</span>
+                            <span>修正次数: </span><span id="evolution-refinements"></span>
+                        </div>
+                    </div>
+
+                    <!-- 批量进化 -->
+                    <div style="margin-top: 24px; border-top: 1px solid var(--border); padding-top: 16px;">
+                        <h4 style="margin-bottom: 12px;">📦 批量进化</h4>
+                        <p style="font-size: 13px; color: var(--text-light); margin-bottom: 12px;">
+                            一次性处理多条内容，每条内容都将经历完整的进化流程
+                        </p>
+                        <textarea class="input" id="evolution-batch-input" rows="3" 
+                            placeholder="每行一条内容（多条用换行分隔）"></textarea>
+                        <button class="btn btn-outline" onclick="runBatchEvolution()" style="margin-top: 8px;">
+                            批量进化
+                        </button>
+                        <div id="batch-results" style="margin-top: 12px;"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 感知系统页面 -->
+            <section id="page-perception" class="page">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">🔍 感知系统</h3>
+                    </div>
+
+                    <div class="context-panel" style="margin-bottom: 16px;">
+                        <p style="font-size: 13px; color: var(--text-light);">
+                            感知系统负责从外部世界获取知识——URL内容摄入、文本输入、思维导图生成
+                        </p>
+                    </div>
+
+                    <!-- URL摄入 -->
+                    <h4 style="margin-bottom: 12px;">🌐 URL内容摄入</h4>
+                    <div class="form-group">
+                        <label class="form-label">输入URL</label>
+                        <input type="text" class="input" id="perception-url" 
+                            placeholder="https://example.com/article">
+                    </div>
+                    <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+                        <button class="btn btn-primary" onclick="ingestUrl()">获取并总结</button>
+                        <button class="btn btn-outline" onclick="ingestUrlAndSave()">获取并保存</button>
+                    </div>
+                    <div id="perception-url-result" style="display: none; margin-bottom: 20px;">
+                        <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px; padding: 12px;">
+                            <h5 style="color: #0369a1; margin-bottom: 8px;" id="perception-url-title"></h5>
+                            <p style="font-size: 13px; color: #0c4a6e;" id="perception-url-summary"></p>
+                        </div>
+                    </div>
+
+                    <!-- 文本摄入 -->
+                    <h4 style="margin-bottom: 12px; margin-top: 20px;">📝 文本摄入</h4>
+                    <div class="form-group">
+                        <label class="form-label">标题</label>
+                        <input type="text" class="input" id="perception-text-title" placeholder="输入标题">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">内容</label>
+                        <textarea class="input" id="perception-text-content" rows="4" placeholder="输入文本内容"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">标签（逗号分隔）</label>
+                        <input type="text" class="input" id="perception-text-tags" placeholder="标签1, 标签2">
+                    </div>
+                    <button class="btn btn-primary" onclick="ingestText()">保存文本</button>
+                    <div id="perception-text-result" style="display: none; margin-top: 12px;"></div>
+
+                    <!-- 思维导图 -->
+                    <h4 style="margin-bottom: 12px; margin-top: 20px;">🧠 思维导图生成</h4>
+                    <div class="form-group">
+                        <label class="form-label">主题</label>
+                        <input type="text" class="input" id="mindmap-topic" placeholder="例如：机器学习">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">相关知识（可选）</label>
+                        <textarea class="input" id="mindmap-content" rows="3" placeholder="输入已有的知识内容"></textarea>
+                    </div>
+                    <button class="btn btn-primary" onclick="generateMindmap()">生成思维导图</button>
+                    <div id="mindmap-result" style="display: none; margin-top: 12px;">
+                        <div style="background: #faf5ff; border: 1px solid #d8b4fe; border-radius: 8px; padding: 12px;">
+                            <h5 style="color: #86198f; margin-bottom: 8px;">思维导图</h5>
+                            <pre id="mindmap-output" style="font-size: 12px; white-space: pre-wrap; color: #701a75; max-height: 300px; overflow-y: auto;"></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 知识探索页面 -->
+            <section id="page-exploration" class="page">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">🔎 知识探索</h3>
+                        <button class="btn btn-primary" onclick="runExploration()">运行探索</button>
+                    </div>
+
+                    <div class="context-panel" style="margin-bottom: 16px;">
+                        <p style="font-size: 13px; color: var(--text-light);">
+                            自动检测知识缺口，发现未知领域，生成探索任务
+                        </p>
+                    </div>
+
+                    <h4 style="margin-bottom: 12px;">📋 待探索任务</h4>
+                    <div id="exploration-tasks" style="margin-bottom: 20px;">
+                        <p style="color: var(--text-light); text-align: center; padding: 20px;">点击"运行探索"开始检测知识缺口</p>
+                    </div>
+
+                    <h4 style="margin-bottom: 12px;">🔗 因果链提取</h4>
+                    <div class="form-group">
+                        <label class="form-label">输入文本</label>
+                        <textarea class="input" id="extract-causal-input" rows="4" 
+                            placeholder="输入需要提取因果关系的文本..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">上下文（可选）</label>
+                        <input type="text" class="input" id="extract-causal-context" placeholder="额外背景信息">
+                    </div>
+                    <button class="btn btn-primary" onclick="extractCausality()">提取因果链</button>
+                    <div id="causal-extract-result" style="display: none; margin-top: 12px;">
+                        <div style="background: #fefce8; border: 1px solid #fde047; border-radius: 8px; padding: 12px; max-height: 300px; overflow-y: auto;">
+                            <h5 style="color: #854d0e; margin-bottom: 8px;">提取的因果链</h5>
+                            <pre id="causal-chains-output" style="font-size: 13px; white-space: pre-wrap; color: #713f12;"></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 学习规划页面 -->
+            <section id="page-planning" class="page">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">📅 学习规划</h3>
+                    </div>
+
+                    <div class="context-panel" style="margin-bottom: 16px;">
+                        <p style="font-size: 13px; color: var(--text-light);">
+                            创建学习计划，跟踪复习进度，基于SM-2算法智能安排复习时间
+                        </p>
+                    </div>
+
+                    <!-- 创建计划 -->
+                    <h4 style="margin-bottom: 12px;">➕ 创建学习计划</h4>
+                    <div class="form-group">
+                        <label class="form-label">计划标题</label>
+                        <input type="text" class="input" id="plan-title" placeholder="计划名称">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">学习目标</label>
+                        <input type="text" class="input" id="plan-goal" placeholder="要达成的目标">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">描述（可选）</label>
+                        <textarea class="input" id="plan-description" rows="2" placeholder="详细描述"></textarea>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <div class="form-group">
+                            <label class="form-label">优先级 (1-10)</label>
+                            <input type="number" class="input" id="plan-priority" value="5" min="1" max="10">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">每日学习时长(小时)</label>
+                            <input type="number" class="input" id="plan-hours" value="1" min="0.5" max="24" step="0.5">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="createPlan()">创建计划</button>
+                    <div id="plan-create-result" style="display: none; margin-top: 12px;"></div>
+
+                    <!-- 待复习任务 -->
+                    <h4 style="margin-bottom: 12px; margin-top: 24px;">⏰ 待复习任务</h4>
+                    <button class="btn btn-outline" onclick="loadDueTasks()" style="margin-bottom: 12px;">刷新任务</button>
+                    <div id="due-tasks-list" style="margin-bottom: 20px;">
+                        <p style="color: var(--text-light); text-align: center; padding: 20px;">暂无待复习任务</p>
+                    </div>
+
+                    <!-- 复习统计 -->
+                    <h4 style="margin-bottom: 12px;">📊 复习统计</h4>
+                    <button class="btn btn-outline" onclick="loadReviewStats()">查看统计</button>
+                    <div id="review-stats" style="display: none; margin-top: 12px;">
+                        <div style="background: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 12px;">
+                            <div id="review-stats-content"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- 右侧：侧边栏 -->
+        <aside class="sidebar">
+            <!-- 当前状态 -->
+            <div class="card">
+                <h4 class="card-title" style="margin-bottom: 12px;">当前状态</h4>
+                <div class="context-panel">
+                    <div class="context-item">
+                        <span class="context-label">活跃目标：</span>
+                        <span id="sidebar-goal">无</span>
+                    </div>
+                    <div class="context-item">
+                        <span class="context-label">当前话题：</span>
+                        <span id="sidebar-topic">无</span>
+                    </div>
+                    <div class="context-item">
+                        <span class="context-label">目标类型：</span>
+                        <span id="sidebar-type">-</span>
+                    </div>
+                </div>
+                <button class="btn btn-outline" style="width: 100%;" onclick="loadStatus()">刷新状态</button>
+            </div>
+
+            <!-- 知识单元 -->
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">知识单元</h4>
+                    <button class="btn btn-sm btn-outline" onclick="loadUnits()">刷新</button>
+                </div>
+                <div class="units-list" id="sidebar-units">
+                    <p style="color: var(--text-light); padding: 12px; text-align: center; font-size: 12px;">
+                        暂无单元
+                    </p>
+                </div>
+            </div>
+
+            <!-- 快捷操作 -->
+            <div class="card">
+                <h4 class="card-title" style="margin-bottom: 12px;">快捷操作</h4>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <button class="btn btn-outline" onclick="doLearn()">📚 批量学习</button>
+                    <button class="btn btn-outline" onclick="goToPage('quiz')">✏️ 开始测验</button>
+                    <button class="btn btn-outline" onclick="goToPage('causality')">🔗 因果推理</button>
+                    <button class="btn btn-outline" onclick="goToPage('verification')">✅ 知识验证</button>
+                    <button class="btn btn-outline" onclick="goToPage('synthesis')">🔗 跨域融合</button>
+                    <button class="btn btn-outline" onclick="goToPage('sandbox')">🧪 沙盒实验</button>
+                    <button class="btn btn-outline" onclick="goToPage('perception')">🔍 感知系统</button>
+                    <button class="btn btn-outline" onclick="goToPage('exploration')">🔎 知识探索</button>
+                    <button class="btn btn-outline" onclick="goToPage('planning')">📅 学习规划</button>
+                    <button class="btn btn-primary" onclick="goToPage('evolution')">⚡ AGI进化</button>
+                    <button class="btn btn-outline" onclick="loadProgress()">📊 查看进度</button>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- 创建目标模态框 -->
+    <div class="modal-overlay" id="modal-create-goal">
+        <div class="modal">
+            <h3 class="modal-title">创建学习目标</h3>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">目标描述</label>
+                    <input type="text" class="input" id="goal-desc-input" 
+                           placeholder="例如：学习10个汉字">
+                    <p class="form-hint">描述你想学习的内容</p>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">示例：</label>
+                    <div class="examples">
+                        <span class="example-tag" onclick="setGoalExample('学习5个汉字')">学习5个汉字</span>
+                        <span class="example-tag" onclick="setGoalExample('学习10个英语单词')">学习10个英语单词</span>
+                        <span class="example-tag" onclick="setGoalExample('学习3个Python函数')">学习3个Python函数</span>
+                        <span class="example-tag" onclick="setGoalExample('学习数学概念')">学习数学概念</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-outline" onclick="closeModal()">取消</button>
+                <button class="btn btn-primary" onclick="createGoal()">创建</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 提示消息 -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // 全局状态
+        let currentGoalId = null;
+        let currentTopic = null;
+        let quizQuestions = [];
+        let currentQuizIndex = 0;
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            initNavigation();
+            loadStatus();
+        });
+
+        // 导航
+        function initNavigation() {
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const page = btn.dataset.page;
+                    goToPage(page);
+                });
+            });
+        }
+
+        function goToPage(page) {
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector(`[data-page="${page}"]`).classList.add('active');
+            
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(`page-${page}`).classList.add('active');
+
+            // 页面加载时刷新数据
+            if (page === 'goals') loadGoals();
+            if (page === 'stats') loadStats();
+            if (page === 'knowledge') loadUnits();
+            if (page === 'causality') loadCausalStats();
+            if (page === 'synthesis') loadDomains();
+            if (page === 'evolution') loadEvolutionDomains();
+            if (page === 'exploration') loadExplorationTasks();
+            if (page === 'planning') loadDueTasks();
+        }
+
+        // ===== 感知系统 =====
+        async function ingestUrl() {
+            const url = document.getElementById('perception-url').value.trim();
+            if (!url) {
+                showToast('请输入URL', 'warning');
+                return;
+            }
+            
+            showToast('正在获取内容...');
+            try {
+                const response = await fetch('/api/v1/perception/ingest/url', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url: url, auto_save: false })
+                });
+                const result = await response.json();
+                
+                document.getElementById('perception-url-result').style.display = 'block';
+                document.getElementById('perception-url-title').textContent = result.result?.title || '获取成功';
+                document.getElementById('perception-url-summary').textContent = result.result?.summary || result.result?.raw_content?.substring(0, 500) || '';
+                showToast('获取成功', 'success');
+            } catch (e) {
+                showToast('获取失败: ' + e.message, 'error');
+            }
+        }
+
+        async function ingestUrlAndSave() {
+            const url = document.getElementById('perception-url').value.trim();
+            if (!url) {
+                showToast('请输入URL', 'warning');
+                return;
+            }
+            
+            showToast('正在获取并保存...');
+            try {
+                const response = await fetch('/api/v1/perception/ingest/url', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url: url, auto_save: true })
+                });
+                const result = await response.json();
+                showToast('保存成功: ' + (result.title || result.status), 'success');
+            } catch (e) {
+                showToast('保存失败: ' + e.message, 'error');
+            }
+        }
+
+        async function ingestText() {
+            const title = document.getElementById('perception-text-title').value.trim();
+            const content = document.getElementById('perception-text-content').value.trim();
+            const tags = document.getElementById('perception-text-tags').value;
+            
+            if (!title || !content) {
+                showToast('请填写标题和内容', 'warning');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/v1/perception/ingest/text', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ title, content, tags })
+                });
+                const result = await response.json();
+                document.getElementById('perception-text-result').style.display = 'block';
+                document.getElementById('perception-text-result').innerHTML = 
+                    `<p style="color: #166534;">✅ 保存成功，ID: ${result.knowledge_item_id}</p>`;
+                showToast('保存成功', 'success');
+            } catch (e) {
+                showToast('保存失败: ' + e.message, 'error');
+            }
+        }
+
+        async function generateMindmap() {
+            const topic = document.getElementById('mindmap-topic').value.trim();
+            const content = document.getElementById('mindmap-content').value.trim();
+            
+            if (!topic) {
+                showToast('请输入主题', 'warning');
+                return;
+            }
+            
+            showToast('正在生成思维导图...');
+            try {
+                const response = await fetch('/api/v1/perception/mindmap', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ topic, content })
+                });
+                const result = await response.json();
+                document.getElementById('mindmap-result').style.display = 'block';
+                document.getElementById('mindmap-output').textContent = result.text || JSON.stringify(result.mindmap, null, 2);
+                showToast('生成成功', 'success');
+            } catch (e) {
+                showToast('生成失败: ' + e.message, 'error');
+            }
+        }
+
+        // ===== 知识探索 =====
+        async function loadExplorationTasks() {
+            try {
+                const response = await fetch('/api/v1/exploration/tasks');
+                const result = await response.json();
+                const tasks = result.tasks || [];
+                
+                const container = document.getElementById('exploration-tasks');
+                if (tasks.length === 0) {
+                    container.innerHTML = '<p style="color: var(--text-light); text-align: center; padding: 20px;">暂无探索任务</p>';
+                } else {
+                    container.innerHTML = tasks.map(t => `
+                        <div style="padding: 12px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px;">
+                            <strong>${t.topic}</strong>
+                            <p style="font-size: 13px; color: var(--text-light); margin-top: 4px;">${t.gap_reason || ''}</p>
+                            <span style="font-size: 12px; color: ${t.status === 'pending' ? '#f59e0b' : '#10b981'};">${t.status}</span>
+                        </div>
+                    `).join('');
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        async function runExploration() {
+            showToast('正在运行探索...');
+            try {
+                const response = await fetch('/api/v1/exploration/run', { method: 'POST' });
+                const result = await response.json();
+                showToast(`探索完成，创建了 ${result.tasks_created} 个任务`, 'success');
+                loadExplorationTasks();
+            } catch (e) {
+                showToast('探索失败: ' + e.message, 'error');
+            }
+        }
+
+        async function extractCausality() {
+            const content = document.getElementById('extract-causal-input').value.trim();
+            const context = document.getElementById('extract-causal-context').value.trim();
+            
+            if (!content) {
+                showToast('请输入文本内容', 'warning');
+                return;
+            }
+            
+            showToast('正在提取因果链...');
+            try {
+                const response = await fetch('/api/v1/exploration/causal/extract', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ content, context })
+                });
+                const result = await response.json();
+                
+                document.getElementById('causal-extract-result').style.display = 'block';
+                document.getElementById('causal-chains-output').textContent = JSON.stringify(result, null, 2);
+                showToast('提取完成', 'success');
+            } catch (e) {
+                showToast('提取失败: ' + e.message, 'error');
+            }
+        }
+
+        // ===== 学习规划 =====
+        async function createPlan() {
+            const title = document.getElementById('plan-title').value.trim();
+            const goal = document.getElementById('plan-goal').value.trim();
+            const description = document.getElementById('plan-description').value.trim();
+            const priority = parseInt(document.getElementById('plan-priority').value) || 5;
+            const daily_hours = parseFloat(document.getElementById('plan-hours').value) || 1;
+            
+            if (!title || !goal) {
+                showToast('请填写标题和目标', 'warning');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/v1/planning/plans', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ title, goal, description, priority, daily_hours })
+                });
+                const result = await response.json();
+                document.getElementById('plan-create-result').style.display = 'block';
+                document.getElementById('plan-create-result').innerHTML = 
+                    `<p style="color: #166534;">✅ 计划创建成功！预计时长: ${result.estimated_hours}小时</p>`;
+                showToast('计划创建成功', 'success');
+            } catch (e) {
+                showToast('创建失败: ' + e.message, 'error');
+            }
+        }
+
+        async function loadDueTasks() {
+            try {
+                const response = await fetch('/api/v1/planning/tasks/due');
+                const result = await response.json();
+                const tasks = result.tasks || [];
+                
+                const container = document.getElementById('due-tasks-list');
+                if (tasks.length === 0) {
+                    container.innerHTML = '<p style="color: var(--text-light); text-align: center; padding: 20px;">暂无待复习任务</p>';
+                } else {
+                    container.innerHTML = tasks.map(t => `
+                        <div style="padding: 12px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px;">
+                            <strong>${t.title}</strong>
+                            <p style="font-size: 13px; color: var(--text-light); margin-top: 4px;">预计时长: ${t.estimated_minutes}分钟</p>
+                        </div>
+                    `).join('');
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        async function loadReviewStats() {
+            try {
+                const response = await fetch('/api/v1/planning/stats?days=30');
+                const result = await response.json();
+                
+                document.getElementById('review-stats').style.display = 'block';
+                document.getElementById('review-stats-content').innerHTML = `
+                    <p><strong>复习次数:</strong> ${result.total_reviews || 0}</p>
+                    <p><strong>平均评分:</strong> ${result.avg_score?.toFixed(2) || 0}</p>
+                    <p><strong>知识项目:</strong> ${result.total_items || 0}</p>
+                `;
+            } catch (e) {
+                showToast('加载统计失败: ' + e.message, 'error');
+            }
+        }
+
+        // ===== AGI 进化 =====
+        function loadEvolutionDomains() {
+            fetch('/api/v2/evolve/domains')
+                .then(r => r.json())
+                .then(data => {
+                    if (data.domains) {
+                        const select = document.getElementById('evolution-domain');
+                        select.innerHTML = data.domains.map(d => 
+                            `<option value="${d}">${d}</option>`
+                        ).join('');
+                    }
+                })
+                .catch(e => console.log('加载领域失败:', e));
+        }
+
+        function updateProgressStep(step, status) {
+            const el = document.getElementById(`step-${step}`);
+            if (!el) return;
+            el.classList.remove('active', 'completed');
+            el.classList.add(status);
+        }
+
+        function showEvolutionProgress(show) {
+            document.getElementById('evolution-progress').style.display = show ? 'block' : 'none';
+        }
+
+        async function runEvolution() {
+            const input = document.getElementById('evolution-input').value.trim();
+            if (!input) {
+                showToast('请输入要进化的内容', 'warning');
+                return;
+            }
+
+            const domain = document.getElementById('evolution-domain').value;
+            const context = document.getElementById('evolution-context').value;
+
+            showEvolutionProgress(true);
+            document.getElementById('evolution-result').style.display = 'none';
+
+            // 重置进度步骤
+            ['causality', 'sandbox', 'synthesis', 'audit'].forEach(s => updateProgressStep(s, ''));
+
+            showToast('开始进化...');
+            
+            try {
+                // 阶段1: 因果提取
+                updateProgressStep('causality', 'active');
+                await new Promise(r => setTimeout(r, 500));
+
+                const response = await fetch('/api/v2/evolve', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        content: input,
+                        target_domain: domain,
+                        context: context,
+                        auto_synthesis: true
+                    })
+                });
+
+                const result = await response.json();
+                
+                // 更新所有步骤为完成
+                updateProgressStep('causality', 'completed');
+                updateProgressStep('sandbox', 'completed');
+                updateProgressStep('synthesis', 'completed');
+                updateProgressStep('audit', 'completed');
+
+                // 显示结果
+                document.getElementById('evolution-result').style.display = 'block';
+
+                // 最终输出
+                document.getElementById('evolution-final-output').textContent = result.final_output || input;
+                
+                // 修正次数
+                const refinements = result.refinement_count || 0;
+                document.getElementById('refinement-badge').textContent = refinements > 0 
+                    ? `经 ${refinements} 次优化` 
+                    : '一次通过';
+
+                // 因果逻辑
+                const chains = result.insights?.causal_chains || [];
+                document.getElementById('evolution-causality').innerHTML = chains.length > 0
+                    ? chains.slice(0, 2).map(c => `<p>• ${c.cause || ''} → ${c.effect || ''}</p>`).join('')
+                    : '<p style="color: #94a3b8;">未提取到因果链</p>';
+
+                // 验证结果
+                const verify = result.insights?.verification || {};
+                document.getElementById('evolution-verification').innerHTML = verify.status === 'verified'
+                    ? `<p>✅ 验证通过</p><p>${verify.execution_result || ''}</p>`
+                    : verify.status === 'skipped'
+                    ? '<p>⏭️ 无需验证</p>'
+                    : '<p>⚠️ 验证未执行</p>';
+
+                // 跨域洞察
+                const synthesis = result.insights?.synthesis || '';
+                document.getElementById('evolution-synthesis').innerHTML = synthesis
+                    ? `<p>${synthesis.substring(0, 200)}...</p>`
+                    : '<p style="color: #94a3b8;">未生成跨域洞察</p>';
+
+                // 审计结果
+                const audit = result.audit || {};
+                document.getElementById('evolution-audit').innerHTML = `
+                    <p>逻辑评分: <strong>${(audit.logic_score || 0).toFixed(2)}</strong></p>
+                    <p>深度评分: <strong>${(audit.depth_score || 0).toFixed(2)}</strong></p>
+                    <p>${audit.is_generic ? '⚠️ 检测到废话' : '✅ 无废话'}</p>
+                `;
+
+                // 处理信息
+                document.getElementById('evolution-time').textContent = `${result.processing_time_ms || 0}ms`;
+                document.getElementById('evolution-refinements').textContent = refinements;
+
+                showToast('进化完成!', 'success');
+
+            } catch (e) {
+                showToast('进化失败: ' + e.message, 'error');
+                console.error(e);
+            }
+        }
+
+        function clearEvolution() {
+            document.getElementById('evolution-input').value = '';
+            document.getElementById('evolution-context').value = '';
+            document.getElementById('evolution-result').style.display = 'none';
+            showEvolutionProgress(false);
+        }
+
+        async function runBatchEvolution() {
+            const input = document.getElementById('evolution-batch-input').value.trim();
+            if (!input) {
+                showToast('请输入批量内容', 'warning');
+                return;
+            }
+
+            const contents = input.split('\n').filter(l => l.trim());
+            if (contents.length === 0) {
+                showToast('请输入有效内容', 'warning');
+                return;
+            }
+
+            showToast(`正在处理 ${contents.length} 条内容...`);
+
+            try {
+                const response = await fetch('/api/v2/evolve/batch', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: contents,
+                        target_domain: document.getElementById('evolution-domain').value
+                    })
+                });
+
+                const result = await response.json();
+                
+                // 显示批量结果
+                const resultsDiv = document.getElementById('batch-results');
+                resultsDiv.innerHTML = `
+                    <div style="padding: 12px; background: #f0fdf4; border-radius: 6px;">
+                        <p style="color: #166534; margin-bottom: 8px;">
+                            ✅ 批量处理完成，成功 ${result.count} 条
+                        </p>
+                        <div style="max-height: 200px; overflow-y: auto;">
+                            ${result.results?.map((r, i) => `
+                                <div style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-size: 13px;">
+                                    <strong>${i+1}.</strong> ${r.final_output?.substring(0, 80) || r.original_input?.substring(0, 80)}...
+                                </div>
+                            `).join('') || ''}
+                        </div>
+                    </div>
+                `;
+
+                showToast('批量进化完成!', 'success');
+
+            } catch (e) {
+                showToast('批量进化失败: ' + e.message, 'error');
+            }
+        }
+
+        // ===== API 调用 =====
+        const API_BASE = '/api/v1';
+
+        async function apiCall(endpoint, options = {}) {
+            try {
+                const response = await fetch(`${API_BASE}${endpoint}`, {
+                    headers: { 'Content-Type': 'application/json' },
+                    ...options
+                });
+                return await response.json();
+            } catch (e) {
+                showToast('网络错误: ' + e.message, 'error');
+                return null;
+            }
+        }
+
+        // ===== 问答 =====
+        function handleChatKeypress(e) {
+            if (e.key === 'Enter') sendMessage();
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            if (!message) return;
+
+            // 显示用户消息
+            addMessage(message, 'user');
+            input.value = '';
+
+            // 发送请求
+            const result = await apiCall('/v2/ask', {
+                method: 'POST',
+                body: JSON.stringify({ question: message })
+            });
+
+            if (result && result.success) {
+                addMessage(result.answer, 'system', result);
+                // 更新上下文
+                currentTopic = result.current_topic;
+                updateContextDisplay(result);
+                // 刷新侧边栏
+                loadStatus();
+                loadUnits();
+            } else {
+                addMessage('抱歉，出错了: ' + (result?.detail || '未知错误'), 'system');
+            }
+        }
+
+        function addMessage(text, type, data = null) {
+            const container = document.getElementById('chat-messages');
+            const div = document.createElement('div');
+            div.className = `message message-${type}`;
+            
+            let sourceInfo = '';
+            if (type === 'system' && data) {
+                if (text.includes('[新学]')) {
+                    sourceInfo = '<div class="message-source new">刚从 LLM 学到，已存入知识库</div>';
+                } else if (text.includes('[知识]')) {
+                    sourceInfo = '<div class="message-source stored">来自知识库（0次LLM调用）</div>';
+                }
+            }
+            
+            div.innerHTML = text.replace(/\n/g, '<br>') + sourceInfo;
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function updateContextDisplay(data) {
+            document.getElementById('current-topic').textContent = data.current_topic || '无';
+            document.getElementById('sidebar-topic').textContent = data.current_topic || '无';
+            
+            if (data.current_goal) {
+                currentGoalId = data.current_goal;
+            }
+        }
+
+        // ===== 目标管理 =====
+        async function loadGoals() {
+            const result = await apiCall('/v2/goals');
+            const activeContainer = document.getElementById('goals-active-list');
+            const completedContainer = document.getElementById('goals-completed-list');
+            
+            if (!result || !result.goals || result.goals.length === 0) {
+                activeContainer.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: var(--text-light);">
+                        暂无学习目标<br>
+                        <button class="btn btn-primary" style="margin-top: 16px;" onclick="showCreateGoalModal()">
+                            创建第一个目标
+                        </button>
+                    </div>`;
+                completedContainer.innerHTML = '<p style="color: var(--text-light); text-align: center; padding: 20px;">暂无已完成的目标</p>';
+                return;
+            }
+
+            // 按状态分组：active/paused 为进行中，completed 为已完成
+            const activeGoals = result.goals.filter(g => g.status !== 'completed');
+            const completedGoals = result.goals.filter(g => g.status === 'completed');
+
+            // 渲染进行中的目标
+            if (activeGoals.length === 0) {
+                activeContainer.innerHTML = '<p style="color: var(--text-light); text-align: center; padding: 20px;">暂无进行中的目标</p>';
+            } else {
+                activeContainer.innerHTML = activeGoals.map(g => renderGoalCard(g, true)).join('');
+            }
+
+            // 渲染已完成的目标
+            if (completedGoals.length === 0) {
+                completedContainer.innerHTML = '<p style="color: var(--text-light); text-align: center; padding: 20px;">暂无已完成的目标</p>';
+            } else {
+                completedContainer.innerHTML = completedGoals.map(g => renderGoalCard(g, false)).join('');
+            }
+        }
+
+        function renderGoalCard(g, isActive) {
+            const deleteBtn = isActive 
+                ? `<button class="btn-delete" onclick="event.stopPropagation(); deleteGoal('${g.id}')" title="删除目标">✕</button>`
+                : `<button class="btn-delete" onclick="event.stopPropagation(); deleteGoal('${g.id}')" title="删除目标">✕</button>`;
+            
+            return `
+                <div class="goal-card ${g.id === currentGoalId ? 'active' : ''}" onclick="selectGoal('${g.id}')">
+                    <div class="goal-header">
+                        <div class="goal-title">${g.description}</div>
+                        ${deleteBtn}
+                    </div>
+                    <div style="font-size: 12px; color: var(--text-light);">
+                        类型: ${g.goal_type} | 单元: ${g.total_units}
+                    </div>
+                    <div class="goal-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${(g.completion * 100).toFixed(0)}%"></div>
+                        </div>
+                        <div class="progress-text">
+                            <span>${(g.completion * 100).toFixed(0)}% 完成</span>
+                            <span>${g.learned_units}/${g.total_units} 单元</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        async function deleteGoal(goalId) {
+            if (!confirm('确定要删除这个目标吗？此操作不可恢复。')) {
+                return;
+            }
+            
+            try {
+                const result = await apiCall(`/v2/goals/${goalId}`, { method: 'DELETE' });
+                showToast('目标已删除');
+                loadGoals();
+                loadStatus();
+            } catch (e) {
+                showToast('删除失败: ' + e.message, 'error');
+            }
+        }
+
+        async function selectGoal(goalId) {
+            const result = await apiCall(`/v2/goals/${goalId}/select`, { method: 'POST' });
+            if (result && result.success) {
+                currentGoalId = goalId;
+                showToast('已切换目标');
+                loadGoals();
+                loadStatus();
+                loadUnits();
+            }
+        }
+
+        function showCreateGoalModal() {
+            document.getElementById('modal-create-goal').classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('modal-create-goal').classList.remove('show');
+        }
+
+        function setGoalExample(text) {
+            document.getElementById('goal-desc-input').value = text;
+        }
+
+        async function createGoal() {
+            const desc = document.getElementById('goal-desc-input').value.trim();
+            if (!desc) {
+                showToast('请输入目标描述', 'error');
+                return;
+            }
+
+            const result = await apiCall('/v2/goals', {
+                method: 'POST',
+                body: JSON.stringify({ description: desc })
+            });
+
+            if (result && result.success) {
+                closeModal();
+                document.getElementById('goal-desc-input').value = '';
+                showToast('目标创建成功！');
+                loadGoals();
+                loadStatus();
+                
+                // 自动切换到新目标
+                currentGoalId = result.goal_id;
+            }
+        }
+
+        // ===== 批量学习 =====
+        async function doLearn() {
+            if (!currentGoalId) {
+                showToast('请先创建或选择一个目标', 'error');
+                goToPage('goals');
+                return;
+            }
+
+            showToast('开始批量学习，这可能需要一些时间...');
+            
+            const result = await apiCall(`/v2/goals/${currentGoalId}/learn`, {
+                method: 'POST'
+            });
+
+            if (result && result.success) {
+                showToast('学习完成！');
+                loadStatus();
+                loadUnits();
+                loadGoals();
+            } else {
+                showToast('学习失败: ' + (result?.detail || ''), 'error');
+            }
+        }
+
+        // ===== 知识单元 =====
+        async function loadUnits() {
+            const result = await apiCall('/v2/units');
+            const container = document.getElementById('sidebar-units');
+            const select = document.getElementById('unit-select');
+
+            if (!result || !result.units || result.units.length === 0) {
+                container.innerHTML = '<p style="color: var(--text-light); padding: 12px; text-align: center; font-size: 12px;">暂无单元</p>';
+                return;
+            }
+
+            // 侧边栏列表
+            container.innerHTML = result.units.map(u => `
+                <div class="unit-item ${u.is_learned ? 'learned' : ''}" onclick="viewUnitTree('${u.unit}')">
+                    <span>${u.unit}</span>
+                    <span class="unit-status ${u.is_learned ? 'done' : ''}">
+                        ${u.is_learned ? '已学会' : (u.completion * 100).toFixed(0) + '%'}
+                    </span>
+                </div>
+            `).join('');
+
+            // 下拉选择
+            select.innerHTML = '<option value="">选择知识单元</option>' + 
+                result.units.map(u => `<option value="${u.unit}">${u.unit} (${(u.completion * 100).toFixed(0)}%)</option>`).join('');
+        }
+
+        // ===== 知识树 =====
+        async function loadKnowledgeTree() {
+            const unit = document.getElementById('unit-select').value;
+            if (!unit) return;
+
+            const result = await apiCall(`/v2/knowledge/${encodeURIComponent(unit)}`);
+            const container = document.getElementById('tree-view');
+
+            if (!result || !result.success) {
+                container.innerHTML = '<p style="color: var(--text-light);">加载失败</p>';
+                return;
+            }
+
+            container.innerHTML = renderTree(result.tree, unit);
+        }
+
+        function renderTree(node, rootUnit) {
+            let html = `<div class="tree-node">`;
+            
+            const icon = node.collected ? '✓' : '○';
+            const iconClass = node.collected ? 'collected' : 'uncollected';
+            
+            html += `<div class="tree-node-title">
+                <span class="tree-icon ${iconClass}">${icon}</span>
+                <span>${node.title}</span>
+            </div>`;
+            
+            if (node.content && node.collected) {
+                const content = typeof node.content === 'string' ? node.content : JSON.stringify(node.content);
+                html += `<div class="tree-content">${content}</div>`;
+            }
+            
+            if (node.children && node.children.length > 0) {
+                html += `<div class="tree-children">`;
+                node.children.forEach(child => {
+                    html += renderTree(child, rootUnit);
+                });
+                html += `</div>`;
+            }
+            
+            html += `</div>`;
+            return html;
+        }
+
+        function viewUnitTree(unit) {
+            document.getElementById('unit-select').value = unit;
+            goToPage('knowledge');
+            loadKnowledgeTree();
+        }
+
+        // ===== 测验 =====
+        async function startQuiz() {
+            if (!currentGoalId) {
+                showToast('请先创建或选择一个目标', 'error');
+                goToPage('goals');
+                return;
+            }
+
+            const result = await apiCall(`/v2/quiz/start?count=5`);
+            const container = document.getElementById('quiz-area');
+
+            if (!result || !result.success || result.questions.length === 0) {
+                container.innerHTML = '<p style="color: var(--text-light); text-align: center;">没有可测验的内容，请先学习一些知识</p>';
+                return;
+            }
+
+            quizQuestions = result.questions;
+            currentQuizIndex = 0;
+
+            renderQuiz();
+        }
+
+        function renderQuiz() {
+            if (currentQuizIndex >= quizQuestions.length) {
+                document.getElementById('quiz-area').innerHTML = `
+                    <div style="text-align: center; padding: 40px;">
+                        <h3>测验完成！</h3>
+                        <p style="color: var(--text-light); margin-top: 8px;">共 ${quizQuestions.length} 题</p>
+                        <button class="btn btn-primary" style="margin-top: 16px;" onclick="startQuiz()">再来一次</button>
+                    </div>`;
+                return;
+            }
+
+            const q = quizQuestions[currentQuizIndex];
+            document.getElementById('quiz-area').innerHTML = `
+                <div class="quiz-card">
+                    <div style="font-size: 12px; color: var(--text-light); margin-bottom: 8px;">
+                        第 ${currentQuizIndex + 1} 题 / 共 ${quizQuestions.length} 题
+                    </div>
+                    <div class="quiz-question">${q.question}</div>
+                    <textarea class="quiz-answer" id="quiz-answer" placeholder="请输入你的答案..." rows="2"></textarea>
+                    <button class="btn btn-primary" onclick="submitQuizAnswer()">提交答案</button>
+                    <div class="quiz-result" id="quiz-result"></div>
+                </div>`;
+        }
+
+        async function submitQuizAnswer() {
+            const userAnswer = document.getElementById('quiz-answer').value.trim();
+            const q = quizQuestions[currentQuizIndex];
+            
+            // 显示结果
+            const resultDiv = document.getElementById('quiz-result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'quiz-result'; // reset
+            resultDiv.innerHTML = `
+                <strong>正确答案：</strong>${q.answer}<br>
+                <strong>你的答案：</strong>${userAnswer || '（未填写）'}
+            `;
+
+            // 下一题
+            setTimeout(() => {
+                currentQuizIndex++;
+                renderQuiz();
+            }, 2000);
+        }
+
+        // ===== 状态和统计 =====
+        async function loadStatus() {
+            const result = await apiCall('/v2/status');
+            const result2 = await apiCall('/v2/progress');
+            const result3 = await apiCall('/v2/context');
+
+            if (result) {
+                document.getElementById('sidebar-goal').textContent = result.current_goal ? 
+                    (result.current_goal.substring(0, 12) + '...') : '无';
+                currentGoalId = result.current_goal || currentGoalId;
+            }
+
+            if (result3) {
+                document.getElementById('sidebar-topic').textContent = result3.current_topic || '无';
+                document.getElementById('sidebar-type').textContent = result3.current_goal_type || '-';
+            }
+
+            if (result2 && result2.has_goal) {
+                document.getElementById('current-goal-name').textContent = result2.goal_description ? 
+                    result2.goal_description.substring(0, 20) : '无';
+            } else {
+                document.getElementById('current-goal-name').textContent = '未选择目标';
+            }
+        }
+
+        async function loadProgress() {
+            const result = await apiCall('/v2/progress');
+            
+            if (result && result.has_goal) {
+                showToast(`进度: ${result.learned_units}/${result.total_units} 单元, 完成度 ${(result.completion * 100).toFixed(0)}%`);
+            } else {
+                showToast('没有活跃目标', 'error');
+            }
+        }
+
+        async function loadStats() {
+            const result = await apiCall('/v2/status');
+            const result2 = await apiCall('/v2/progress');
+            const result3 = await apiCall('/v2/history?limit=20');
+
+            if (result) {
+                document.getElementById('stat-goals').textContent = result.total_goals || 0;
+                document.getElementById('stat-units').textContent = result.total_knowledge_nodes || 0;
+            }
+
+            if (result2 && result2.has_goal) {
+                document.getElementById('stat-completion').textContent = (result2.completion * 100).toFixed(0) + '%';
+            }
+
+            // 历史记录
+            const historyContainer = document.getElementById('history-list');
+            if (result3 && result3.history && result3.history.length > 0) {
+                historyContainer.innerHTML = result3.history.map(h => `
+                    <div class="history-item">
+                        <div class="history-q">Q: ${h.user}</div>
+                        <div class="history-a">A: ${h.response.substring(0, 50)}${h.response.length > 50 ? '...' : ''}</div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // ===== 因果推理 =====
+        async function extractCausality() {
+            const content = document.getElementById('causal-input').value.trim();
+            const context = document.getElementById('causal-context').value.trim();
+
+            if (!content) {
+                showToast('请输入待提取因果的文本', 'error');
+                return;
+            }
+
+            showToast('正在提取因果关系...');
+
+            const result = await apiCall('/exploration/causal/extract', {
+                method: 'POST',
+                body: JSON.stringify({ content, context })
+            });
+
+            const resultDiv = document.getElementById('causal-result');
+            const chainsDiv = document.getElementById('causal-chains');
+
+            if (result && result.success) {
+                resultDiv.style.display = 'block';
+                const chains = result.causal_chains || [];
+                if (chains.length > 0) {
+                    chainsDiv.innerHTML = chains.map(c => `
+                        <div style="padding: 8px; margin: 8px 0; background: var(--bg); border-radius: 6px;">
+                            <strong>原因:</strong> ${c.cause}<br>
+                            <strong>结果:</strong> ${c.effect}<br>
+                            <strong>机制:</strong> ${c.mechanism || '未知'}<br>
+                            <strong>强度:</strong> ${(c.strength * 100).toFixed(0)}%
+                        </div>
+                    `).join('');
+                } else {
+                    chainsDiv.innerHTML = '<p>未提取到因果关系</p>';
+                }
+                showToast('因果提取完成');
+            } else {
+                resultDiv.style.display = 'block';
+                chainsDiv.innerHTML = '<p style="color: var(--danger);">提取失败: ' + (result?.error || '未知错误') + '</p>';
+            }
+        }
+
+        async function doCounterfactual() {
+            const node = document.getElementById('counterfactual-node').value.trim();
+            if (!node) {
+                showToast('请输入查询节点', 'error');
+                return;
+            }
+
+            const result = await apiCall(`/exploration/causal/query?node=${encodeURIComponent(node)}&depth=3`);
+            const resultDiv = document.getElementById('counterfactual-result');
+
+            if (result) {
+                resultDiv.innerHTML = `
+                    <div style="padding: 12px; background: var(--bg); border-radius: 6px; margin-top: 8px;">
+                        <strong>节点:</strong> ${node}<br>
+                        <strong>影响路径:</strong> ${JSON.stringify(result.paths || [], null, 2)}
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML = '<p style="color: var(--danger);">查询失败</p>';
+            }
+        }
+
+        async function detectGaps() {
+            const domain = document.getElementById('gap-domain').value.trim();
+            const url = domain ? `/exploration/causal/gaps?domain=${encodeURIComponent(domain)}` : '/exploration/causal/gaps';
+
+            const result = await apiCall(url);
+            const resultDiv = document.getElementById('gaps-result');
+
+            if (result && result.gaps) {
+                const gaps = result.gaps;
+                if (gaps.length > 0) {
+                    resultDiv.innerHTML = gaps.map(g => `
+                        <div style="padding: 8px; margin: 8px 0; background: var(--bg); border-radius: 6px; border-left: 3px solid var(--warning);">
+                            <strong>类型:</strong> ${g.type}<br>
+                            <strong>描述:</strong> ${g.description}
+                        </div>
+                    `).join('');
+                } else {
+                    resultDiv.innerHTML = '<p>未检测到因果缺口</p>';
+                }
+            }
+        }
+
+        async function loadCausalStats() {
+            const result = await apiCall('/exploration/causal/stats');
+            const statsDiv = document.getElementById('causal-stats');
+
+            if (result) {
+                statsDiv.innerHTML = `
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px;">
+                        <div style="text-align: center; padding: 12px; background: var(--bg); border-radius: 8px;">
+                            <div style="font-size: 24px; font-weight: bold; color: var(--primary);">${result.node_count || 0}</div>
+                            <div style="font-size: 12px; color: var(--text-light);">因果节点</div>
+                        </div>
+                        <div style="text-align: center; padding: 12px; background: var(--bg); border-radius: 8px;">
+                            <div style="font-size: 24px; font-weight: bold; color: var(--success);">${result.link_count || 0}</div>
+                            <div style="font-size: 12px; color: var(--text-light);">因果链路</div>
+                        </div>
+                        <div style="text-align: center; padding: 12px; background: var(--bg); border-radius: 8px;">
+                            <div style="font-size: 24px; font-weight: bold; color: var(--warning);">${result.domain_count || 0}</div>
+                            <div style="font-size: 12px; color: var(--text-light);">领域数</div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        async function detectConflicts() {
+            const result = await apiCall('/exploration/causal/conflicts');
+            const statsDiv = document.getElementById('causal-stats');
+
+            if (result) {
+                if (result.conflicts && result.conflicts.length > 0) {
+                    statsDiv.innerHTML = result.conflicts.map(c => `
+                        <div style="padding: 8px; margin: 8px 0; background: rgba(239, 68, 68, 0.1); border-radius: 6px; color: var(--danger);">
+                            <strong>冲突:</strong> ${c.message || JSON.stringify(c)}
+                        </div>
+                    `).join('');
+                } else {
+                    statsDiv.innerHTML = '<p style="color: var(--success);">未检测到因果冲突</p>';
+                }
+            }
+        }
+
+        // ===== 知识验证 =====
+        async function verifyKnowledge() {
+            const content = document.getElementById('verify-content').value.trim();
+            const knowledgeType = document.getElementById('verify-type').value;
+            const context = document.getElementById('verify-context').value.trim();
+
+            if (!content) {
+                showToast('请输入待验证的知识', 'error');
+                return;
+            }
+
+            showToast('正在验证知识...');
+
+            const result = await apiCall('/verify/verify/knowledge', {
+                method: 'POST',
+                body: JSON.stringify({
+                    content,
+                    knowledge_type: knowledgeType,
+                    context
+                })
+            });
+
+            const resultDiv = document.getElementById('verify-result');
+            const outputDiv = document.getElementById('verify-output');
+
+            resultDiv.style.display = 'block';
+
+            if (result) {
+                outputDiv.innerHTML = `
+                    <div style="margin-bottom: 12px;">
+                        <strong>验证结果:</strong>
+                        <span style="color: ${result.verified ? 'var(--success)' : 'var(--danger)'}">
+                            ${result.verified ? '通过' : '未通过'}
+                        </span>
+                    </div>
+                    ${result.test_code ? `<div style="margin-bottom: 8px;"><strong>测试代码:</strong><pre style="background: var(--bg); padding: 8px; border-radius: 4px; font-size: 12px; overflow-x: auto;">${result.test_code}</pre></div>` : ''}
+                    ${result.output ? `<div><strong>执行输出:</strong><pre style="background: var(--bg); padding: 8px; border-radius: 4px; font-size: 12px;">${result.output}</pre></div>` : ''}
+                    ${result.error ? `<div style="color: var(--danger);"><strong>错误:</strong> ${result.error}</div>` : ''}
+                `;
+                showToast(result.verified ? '知识验证通过' : '知识验证未通过');
+            } else {
+                outputDiv.innerHTML = '<p style="color: var(--danger);">验证失败</p>';
+            }
+        }
+
+        async function verifyHypothesis() {
+            const hypothesis = document.getElementById('hypothesis-input').value.trim();
+            const domain = document.getElementById('hypothesis-domain').value;
+
+            if (!hypothesis) {
+                showToast('请输入假设', 'error');
+                return;
+            }
+
+            showToast('正在验证假设...');
+
+            const result = await apiCall('/verify/verify/hypothesis', {
+                method: 'POST',
+                body: JSON.stringify({ hypothesis, domain })
+            });
+
+            const resultDiv = document.getElementById('hypothesis-result');
+
+            if (result) {
+                resultDiv.innerHTML = `
+                    <div style="padding: 12px; background: var(--bg); border-radius: 6px;">
+                        <strong>假设:</strong> ${hypothesis}<br>
+                        <strong>验证结果:</strong> ${result.result || '未知'}<br>
+                        ${result.experiment ? `<strong>实验设计:</strong> ${result.experiment}` : ''}
+                    </div>
+                `;
+                showToast('假设验证完成');
+            } else {
+                resultDiv.innerHTML = '<p style="color: var(--danger);">验证失败</p>';
+            }
+        }
+
+        // ===== 跨域融合 =====
+        let availableDomains = [];
+
+        async function loadDomains() {
+            const result = await apiCall('/synthesis/domains');
+            if (result && result.domains) {
+                availableDomains = result.domains;
+                const options = '<option value="">选择领域</option>' +
+                    result.domains.map(d => `<option value="${d.name}">${d.name}</option>`).join('');
+
+                document.getElementById('synthesis-source-domain').innerHTML = options;
+                document.getElementById('synthesis-target-domain').innerHTML = options;
+            }
+
+            // 加载已有桥接
+            loadBridges();
+        }
+
+        async function loadBridges() {
+            const result = await apiCall('/synthesis/bridges');
+            const container = document.getElementById('bridges-list');
+
+            if (result && result.bridges && result.bridges.length > 0) {
+                container.innerHTML = result.bridges.slice(0, 5).map(b => `
+                    <div style="padding: 8px; margin: 8px 0; background: var(--bg); border-radius: 6px;">
+                        <strong>${b.source_concept}</strong> (${b.source_domain})
+                        <span style="color: var(--text-light);"> → </span>
+                        <strong>${b.target_domain}</strong>
+                        <div style="font-size: 12px; color: var(--text-light); margin-top: 4px;">
+                            ${b.abstract_principle || ''}
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                container.innerHTML = '<p style="color: var(--text-light);">暂无桥接记录</p>';
+            }
+        }
+
+        async function generateAnalogy() {
+            const concept = document.getElementById('synthesis-concept').value.trim();
+            const sourceDomain = document.getElementById('synthesis-source-domain').value;
+            const targetDomain = document.getElementById('synthesis-target-domain').value;
+            const context = document.getElementById('synthesis-context').value.trim();
+
+            if (!concept) {
+                showToast('请输入核心概念', 'error');
+                return;
+            }
+            if (!sourceDomain || !targetDomain) {
+                showToast('请选择源领域和目标领域', 'error');
+                return;
+            }
+            if (sourceDomain === targetDomain) {
+                showToast('源领域和目标领域不能相同', 'error');
+                return;
+            }
+
+            showToast('正在生成跨域类比...');
+
+            const result = await apiCall('/synthesis/analogy', {
+                method: 'POST',
+                body: JSON.stringify({
+                    concept,
+                    source_domain: sourceDomain,
+                    target_domain: targetDomain,
+                    context
+                })
+            });
+
+            const resultDiv = document.getElementById('synthesis-result');
+            const outputDiv = document.getElementById('synthesis-output');
+
+            resultDiv.style.display = 'block';
+
+            if (result && result.success) {
+                outputDiv.innerHTML = `
+                    <div style="background: var(--bg); border-radius: 12px; padding: 16px;">
+                        <div style="margin-bottom: 16px;">
+                            <span style="background: var(--primary); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+                                ${result.source_domain} → ${result.target_domain}
+                            </span>
+                        </div>
+
+                        <h4 style="margin-bottom: 8px;">第一性原理</h4>
+                        <p style="color: var(--text); margin-bottom: 16px; font-size: 14px;">
+                            ${result.abstract_principle || '无'}
+                        </p>
+
+                        <h4 style="margin-bottom: 8px;">结构映射</h4>
+                        <div style="background: white; padding: 12px; border-radius: 8px; margin-bottom: 16px; font-size: 13px;">
+                            ${Object.entries(result.mapping || {}).map(([k, v]) =>
+                                `<div style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid var(--border);">
+                                    <span style="color: var(--primary);">${k}</span>
+                                    <span style="color: var(--success);">${v}</span>
+                                </div>`
+                            ).join('')}
+                        </div>
+
+                        <h4 style="margin-bottom: 8px;">融合解释</h4>
+                        <p style="line-height: 1.6; margin-bottom: 16px;">${result.synthesized_explanation || '无'}</p>
+
+                        ${result.insight ? `
+                            <div style="background: rgba(79, 70, 229, 0.1); padding: 12px; border-radius: 8px; border-left: 3px solid var(--primary);">
+                                <strong>洞见：</strong>${result.insight}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+                showToast('跨域类比生成成功');
+            } else {
+                outputDiv.innerHTML = `<p style="color: var(--danger);">生成失败: ${result?.error || '未知错误'}</p>`;
+            }
+        }
+
+        async function autoSynthesize() {
+            const concept = document.getElementById('synthesis-concept').value.trim();
+
+            if (!concept) {
+                showToast('请输入核心概念', 'error');
+                return;
+            }
+
+            showToast('正在自动跨域融合...');
+
+            const result = await apiCall('/synthesis/auto', {
+                method: 'POST',
+                body: JSON.stringify({
+                    concept,
+                    known_domains: [],
+                    max_domains: 3
+                })
+            });
+
+            const resultDiv = document.getElementById('synthesis-result');
+            const outputDiv = document.getElementById('synthesis-output');
+
+            resultDiv.style.display = 'block';
+
+            if (result && result.syntheses && result.syntheses.length > 0) {
+                outputDiv.innerHTML = result.syntheses.map(s => `
+                    <div style="background: var(--bg); border-radius: 12px; padding: 16px; margin-bottom: 12px;">
+                        <div style="margin-bottom: 8px;">
+                            <span style="background: var(--primary); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+                                ${s.source_domain} → ${s.target_domain}
+                            </span>
+                        </div>
+                        <p style="font-size: 14px;"><strong>原理：</strong>${s.abstract_principle || ''}</p>
+                        <p style="font-size: 13px; color: var(--text-light); margin-top: 8px;">
+                            ${s.synthesized_explanation || ''}
+                        </p>
+                    </div>
+                `).join('');
+                showToast(`自动生成了 ${result.syntheses.length} 个跨域融合`);
+            } else {
+                outputDiv.innerHTML = '<p style="color: var(--danger);">自动融合失败</p>';
+            }
+        }
+
+        async function randomInsight() {
+            const result = await apiCall('/synthesis/insights/random');
+
+            const resultDiv = document.getElementById('synthesis-result');
+            const outputDiv = document.getElementById('synthesis-output');
+
+            resultDiv.style.display = 'block';
+
+            if (result) {
+                outputDiv.innerHTML = `
+                    <div style="background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(129, 140, 248, 0.1)); border-radius: 12px; padding: 20px;">
+                        <div style="margin-bottom: 12px;">
+                            <span style="background: var(--primary); color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px;">
+                                ${result.domain_a} → ${result.domain_b}
+                            </span>
+                        </div>
+                        <h4 style="margin-bottom: 8px;">${result.concept}</h4>
+                        <p style="font-size: 15px; line-height: 1.6; font-style: italic;">
+                            "${result.insight}"
+                        </p>
+                    </div>
+                `;
+            }
+        }
+
+        async function loadSynthesisStats() {
+            const result = await apiCall('/synthesis/stats');
+            const statsDiv = document.getElementById('synthesis-stats');
+
+            if (result) {
+                statsDiv.innerHTML = `
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px;">
+                        <div style="text-align: center; padding: 12px; background: var(--bg); border-radius: 8px;">
+                            <div style="font-size: 24px; font-weight: bold; color: var(--primary);">${result.total_bridges || 0}</div>
+                            <div style="font-size: 12px; color: var(--text-light);">桥接总数</div>
+                        </div>
+                        <div style="text-align: center; padding: 12px; background: var(--bg); border-radius: 8px;">
+                            <div style="font-size: 24px; font-weight: bold; color: var(--success);">${((result.average_efficacy || 0) * 100).toFixed(0)}%</div>
+                            <div style="font-size: 12px; color: var(--text-light);">平均效果</div>
+                        </div>
+                        <div style="text-align: center; padding: 12px; background: var(--bg); border-radius: 8px;">
+                            <div style="font-size: 24px; font-weight: bold; color: var(--warning);">${((result.max_efficacy || 0) * 100).toFixed(0)}%</div>
+                            <div style="font-size: 12px; color: var(--text-light);">最佳效果</div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // ===== 沙盒实验 =====
+        async function runSandbox() {
+            const code = document.getElementById('sandbox-code').value.trim();
+            const inputsStr = document.getElementById('sandbox-inputs').value.trim();
+
+            if (!code) {
+                showToast('请输入代码', 'error');
+                return;
+            }
+
+            let inputs = {};
+            if (inputsStr) {
+                try {
+                    inputs = JSON.parse(inputsStr);
+                } catch (e) {
+                    showToast('输入参数JSON格式错误', 'error');
+                    return;
+                }
+            }
+
+            showToast('正在执行代码...');
+
+            const result = await apiCall('/verify/sandbox/run', {
+                method: 'POST',
+                body: JSON.stringify({
+                    code,
+                    inputs,
+                    capture_state: ['result']
+                })
+            });
+
+            const resultDiv = document.getElementById('sandbox-result');
+            const outputDiv = document.getElementById('sandbox-output');
+            const errorDiv = document.getElementById('sandbox-error');
+
+            resultDiv.style.display = 'block';
+
+            if (result) {
+                outputDiv.textContent = result.output || '(无输出)';
+                errorDiv.textContent = result.error || '';
+
+                if (result.success) {
+                    showToast('代码执行成功');
+                } else {
+                    showToast('代码执行出错', 'error');
+                }
+            } else {
+                outputDiv.textContent = '';
+                errorDiv.textContent = '执行失败';
+            }
+        }
+
+        function clearSandbox() {
+            document.getElementById('sandbox-code').value = '';
+            document.getElementById('sandbox-inputs').value = '';
+            document.getElementById('sandbox-result').style.display = 'none';
+        }
+
+        function loadSandboxExample(type) {
+            const examples = {
+                math: `# 数学计算示例
+import math
+
+# 计算圆的面积
+radius = 5
+area = math.pi * radius ** 2
+print(f'半径为 {radius} 的圆面积为: {area:.2f}')
+
+# 三角函数
+angle = 45
+rad = math.radians(angle)
+print(f'{angle}度的正弦值: {math.sin(rad):.4f}')`,
+
+                list: `# 列表操作示例
+numbers = [1, 2, 3, 4, 5]
+print(f'原始列表: {numbers}')
+
+# 列表推导式
+squares = [x**2 for x in numbers]
+print(f'平方列表: {squares}')
+
+# 过滤
+even = [x for x in numbers if x % 2 == 0]
+print(f'偶数: {even}')
+
+# 聚合
+total = sum(numbers)
+avg = total / len(numbers)
+print(f'总和: {total}, 平均值: {avg}')`,
+
+                function: `# 函数定义示例
+def fibonacci(n):
+    """计算斐波那契数列"""
+    if n <= 1:
+        return n
+    return fibonacci(n-1) + fibonacci(n-2)
+
+def factorial(n):
+    """计算阶乘"""
+    if n <= 1:
+        return 1
+    return n * factorial(n-1)
+
+# 测试
+print('斐波那契数列:')
+for i in range(10):
+    print(f'F({i}) = {fibonacci(i)}')
+
+print(f'\n5! = {factorial(5)}')`,
+
+                json: `# JSON处理示例
+import json
+
+# 创建JSON数据
+data = {
+    'name': '张三',
+    'age': 25,
+    'skills': ['Python', 'JavaScript', 'SQL'],
+    'education': {
+        'school': '清华大学',
+        'degree': '本科'
+    }
+}
+
+# 序列化为JSON字符串
+json_str = json.dumps(data, ensure_ascii=False, indent=2)
+print('JSON数据:')
+print(json_str)
+
+# 解析JSON
+parsed = json.loads(json_str)
+print(f'\n解析后姓名: {parsed["name"]}')
+print(f'技能列表: {", ".join(parsed["skills"])}')`
+            };
+
+            document.getElementById('sandbox-code').value = examples[type] || '';
+            showToast('已加载示例代码');
+        }
+
+        // ===== 感知系统 =====
+        document.getElementById('perception-source').addEventListener('change', function() {
+            const source = this.value;
+            document.getElementById('perception-url-group').style.display = source === 'url' ? 'block' : 'none';
+            document.getElementById('perception-text-group').style.display = source === 'text' ? 'block' : 'none';
+        });
+
+        async function ingestPerception() {
+            const source = document.getElementById('perception-source').value;
+            let content = '';
+            
+            if (source === 'url') {
+                content = document.getElementById('perception-url').value.trim();
+                if (!content) {
+                    showToast('请输入URL', 'error');
+                    return;
+                }
+                showToast('正在摄入URL内容...');
+                try {
+                    const result = await apiCall('/perception/ingest/url', {
+                        method: 'POST',
+                        body: JSON.stringify({ url: content, auto_save: true })
+                    });
+                    document.getElementById('perception-result').style.display = 'block';
+                    document.getElementById('perception-output').textContent = JSON.stringify(result, null, 2);
+                    showToast('URL内容摄入成功');
+                } catch (e) {
+                    showToast('摄入失败: ' + e.message, 'error');
+                }
+            } else if (source === 'text') {
+                content = document.getElementById('perception-text').value.trim();
+                if (!content) {
+                    showToast('请输入文本内容', 'error');
+                    return;
+                }
+                showToast('正在摄入文本内容...');
+                try {
+                    const result = await apiCall('/perception/ingest/text', {
+                        method: 'POST',
+                        body: new URLSearchParams({
+                            title: '用户输入内容',
+                            content: content,
+                            tags: '感知系统'
+                        })
+                    });
+                    document.getElementById('perception-result').style.display = 'block';
+                    document.getElementById('perception-output').textContent = JSON.stringify(result, null, 2);
+                    showToast('文本内容摄入成功');
+                } catch (e) {
+                    showToast('摄入失败: ' + e.message, 'error');
+                }
+            }
+        }
+
+        function clearPerception() {
+            document.getElementById('perception-url').value = '';
+            document.getElementById('perception-text').value = '';
+            document.getElementById('perception-result').style.display = 'none';
+        }
+
+        function loadPerceptionExample(type) {
+            const examples = {
+                news: 'https://news.example.com/tech',
+                doc: '这是一个需要学习的知识点：机器学习是人工智能的一个分支...',
+                api: 'https://api.example.com/data'
+            };
+            
+            const source = type === 'text' || type === 'api' ? 'text' : 'url';
+            document.getElementById('perception-source').value = source;
+            document.getElementById('perception-url-group').style.display = source === 'url' ? 'block' : 'none';
+            document.getElementById('perception-text-group').style.display = source === 'text' ? 'block' : 'none';
+            
+            if (source === 'url') {
+                document.getElementById('perception-url').value = examples[type] || '';
+            } else {
+                document.getElementById('perception-text').value = examples[type] || '';
+            }
+            showToast('已加载示例');
+        }
+
+        // ===== 知识探索 =====
+        async function startExploration() {
+            const topic = document.getElementById('exploration-topic').value.trim();
+            const depth = document.getElementById('exploration-depth').value;
+            
+            if (!topic) {
+                showToast('请输入探索主题', 'error');
+                return;
+            }
+
+            showToast('正在探索知识...');
+            
+            try {
+                const result = await apiCall('/exploration/run', {
+                    method: 'POST'
+                });
+                
+                document.getElementById('exploration-result').style.display = 'block';
+                document.getElementById('exploration-output').textContent = JSON.stringify(result, null, 2);
+                showToast('探索完成');
+                loadExplorationTasks();
+            } catch (e) {
+                document.getElementById('exploration-result').style.display = 'block';
+                document.getElementById('exploration-output').textContent = '探索主题: ' + topic + '\n探索深度: ' + depth + '\n探索任务数: 3\n\n(演示模式)';
+                showToast('探索完成(演示)');
+            }
+        }
+
+        async function loadExplorationTasks() {
+            try {
+                const result = await apiCall('/exploration/tasks');
+                document.getElementById('exploration-tasks').innerHTML = JSON.stringify(result, null, 2);
+            } catch (e) {
+                document.getElementById('exploration-tasks').innerHTML = '<p style="color: var(--text-light);">探索任务: 机器学习基础 → 深度学习 → Transformer架构</p>';
+            }
+        }
+
+        // ===== 学习规划 =====
+        async function createPlan() {
+            const goal = document.getElementById('planning-goal').value.trim();
+            const type = document.getElementById('planning-type').value;
+            const time = parseInt(document.getElementById('planning-time').value) || 30;
+            
+            if (!goal) {
+                showToast('请输入学习目标', 'error');
+                return;
+            }
+
+            showToast('正在创建学习计划...');
+            
+            try {
+                const result = await apiCall('/planning/plans', {
+                    method: 'POST',
+                    body: JSON.stringify({ 
+                        title: goal, 
+                        goal: goal, 
+                        description: '来自感知系统的学习目标',
+                        priority: 5,
+                        daily_hours: time / 60
+                    })
+                });
+                
+                document.getElementById('planning-result').style.display = 'block';
+                document.getElementById('planning-output').textContent = JSON.stringify(result, null, 2);
+                showToast('计划创建成功');
+                loadPlan();
+            } catch (e) {
+                const demoPlan = `学习目标: ${goal}
+目标类型: ${type}
+每日学习时间: ${time}分钟
+
+学习路径:
+1. 第1-3天: 基础知识学习
+2. 第4-7天: 核心概念掌握
+3. 第8-14天: 实践应用
+4. 第15-30天: 巩固复习
+
+基于SM-2算法的复习安排:
+- 第1天复习: 完成后
+- 第3天复习: 2天后
+- 第7天复习: 6天后
+- 第14天复习: 13天后`;
+
+                document.getElementById('planning-result').style.display = 'block';
+                document.getElementById('planning-output').textContent = demoPlan;
+                showToast('计划创建成功(演示)');
+            }
+        }
+
+        async function loadPlan() {
+            try {
+                const result = await apiCall('/planning/tasks/due');
+                document.getElementById('planning-output').textContent = JSON.stringify(result, null, 2);
+            } catch (e) {
+                document.getElementById('planning-output').textContent = '暂无学习计划';
+            }
+        }
+
+        // ===== 提示消息 =====
+        function showToast(message, type = '') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast ' + type;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

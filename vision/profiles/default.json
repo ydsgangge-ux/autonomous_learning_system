@@ -1,0 +1,8 @@
+{
+  "priorities": ["depth_over_breadth", "practical_application", "concept_mastery", "systems_thinking"],
+  "avoid": ["rote_memorization", "passive_reading"],
+  "daily_goal_hours": 1.0,
+  "preferred_difficulty": "challenging",
+  "learning_style": "active",
+  "focus_domains": []
+}
